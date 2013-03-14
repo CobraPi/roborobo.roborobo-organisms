@@ -21,11 +21,6 @@
 #include "WorldModels/EvolvingRobotAgentWorldModel.h"
 #include "BehaviorControlArchitectures/EnergyPerceptronControlArchitecture.h"
 #include "SDL_collide.h"
-#ifdef MACOSX
-#include "SDL_ttf/SDL_ttf.h"
-#else
-#include "SDL/SDL_ttf.h"
-#endif
 
 /**
  * Create a new RobotAgent for the World __world. The RobotAgent class is called
@@ -486,38 +481,6 @@ bool RobotAgent::isCollision() {
     //		}
     //	}
 	return false;
-}
-
-int RenderTextToSurface(std::string Text, int x, int y, SDL_Surface *Dest, SDL_Color *TXT_Color) {
-    SDL_Color txt_Color;
-    if(TXT_Color == NULL) {
-        txt_Color.r = 0x00;
-        txt_Color.g = 0x00;
-        txt_Color.b = 0x00;
-    }else{
-        txt_Color.r = TXT_Color->r;
-        txt_Color.g = TXT_Color->g;
-        txt_Color.b = TXT_Color->b;
-    }
-	SDL_Surface *TTF_Message;
-	if (!TTF_WasInit()) {
-		TTF_Init();
-	}
-	TTF_Font *font = TTF_OpenFont(gFontName.c_str(), 24);
-	if (font == NULL) {
-		char* error = TTF_GetError();
-		std::cout << "TTF_Font: " << error << std::endl;
-		return 1;
-	}
-	if (!(TTF_Message = TTF_RenderText_Solid(font, Text.c_str(), txt_Color))) {
-		SDL_FreeSurface(TTF_Message);
-		std::cout << "Error in function 'RenderTextToSurface': TTF_Message could not be blitted: returned 1" << std::endl;
-		return 1;
-	}
-	TTF_CloseFont(font);
-	apply_surface(x, y, TTF_Message, Dest);
-	SDL_FreeSurface(TTF_Message);
-	return 0;
 }
 
 /**

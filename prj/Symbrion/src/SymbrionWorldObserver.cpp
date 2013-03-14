@@ -5,6 +5,7 @@
 #include "World/World.h"
 #include "Symbrion/include/SymbrionSharedData.h"
 #include "Symbrion/include/SymbrionAgentWorldModel.h"
+#include "Symbrion/include/Agents/SymbrionRobotAgent.h"
 #include "BehaviorControlArchitectures/EvolutionaryControlArchitecture.h"
 
 SymbrionWorldObserver::SymbrionWorldObserver(World *__world) : WorldObserver(__world)

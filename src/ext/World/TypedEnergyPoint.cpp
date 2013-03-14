@@ -14,7 +14,7 @@
 #include <cstring>
 #include <boost/lexical_cast.hpp>
 
-extern int RenderTextToSurface(std::string Text, int x, int y, SDL_Surface *Dest, SDL_Color *TXT_Color);
+#include "Utilities/SDL_gfxPrimitivesExtra.h"
 
 Uint32 TypedEnergyPoint::colors[10] = {
     0x01ff00ff, // Purple
@@ -69,7 +69,7 @@ void TypedEnergyPoint::display()
 
 	std::string str = "";
 	str += boost::lexical_cast<std::string > (_type);
-	RenderTextToSurface(str, getPosition().x - 0.5* getRadius(), getPosition().y - getRadius(), gBackgroundImage, NULL);
+	RenderTextToSurface(str, getPosition().x - 0.5 * getRadius(), getPosition().y - getRadius(), gBackgroundImage, NULL);
 }
 
 Uint32 TypedEnergyPoint::getColor(int type){

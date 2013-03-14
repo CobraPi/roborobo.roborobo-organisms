@@ -36,22 +36,22 @@
          condition = "__organism == NULL"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "383564544.736275"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1019"
-         endingLineNumber = "1019">
+         startingLineNumber = "982"
+         endingLineNumber = "982">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "383564544.736275"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1018"
-         endingLineNumber = "1018">
+         startingLineNumber = "981"
+         endingLineNumber = "981">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -71,22 +71,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "383564544.736275"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1002"
-         endingLineNumber = "1002">
+         startingLineNumber = "965"
+         endingLineNumber = "965">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "383564544.736275"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1020"
-         endingLineNumber = "1020">
+         startingLineNumber = "983"
+         endingLineNumber = "983">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -436,22 +436,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384963592.700823"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384963855.340458"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "338"
-         endingLineNumber = "338"
+         startingLineNumber = "333"
+         endingLineNumber = "333"
          landmarkName = "RobotAgent::move(int __recursiveIt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -460,11 +449,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384963856.318519"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "339"
-         endingLineNumber = "339"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "RobotAgent::move(int __recursiveIt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -473,11 +462,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384963886.658393"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "340"
-         endingLineNumber = "340"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
          landmarkName = "RobotAgent::move(int __recursiveIt)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -499,11 +488,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384964208.460861"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "320"
-         endingLineNumber = "320"
+         startingLineNumber = "315"
+         endingLineNumber = "315"
          landmarkName = "RobotAgent::applyDynamics()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -512,11 +501,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/core/RobotAgent.cpp"
-         timestampString = "384964209.460642"
+         timestampString = "384969650.657042"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "321"
-         endingLineNumber = "321"
+         startingLineNumber = "316"
+         endingLineNumber = "316"
          landmarkName = "RobotAgent::applyDynamics()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -558,6 +547,58 @@
          endingLineNumber = "1364"
          landmarkName = "initRoborobo()"
          landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/ext/World/TypedEnergyPoint.cpp"
+         timestampString = "384968849.407331"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
+         landmarkName = "TypedEnergyPoint::display()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/ext/World/TypedEnergyPoint.cpp"
+         timestampString = "384968868.429046"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
+         landmarkName = "TypedEnergyPoint::display()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/ext/World/TypedEnergyPoint.cpp"
+         timestampString = "384968877.552107"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "TypedEnergyPoint::display()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/ext/World/EnergyPoint.cpp"
+         timestampString = "384968962.991356"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
+         landmarkName = "EnergyPoint::display()"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
