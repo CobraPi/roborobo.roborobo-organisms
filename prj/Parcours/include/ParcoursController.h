@@ -8,7 +8,7 @@
 #ifndef ParcoursCONTROLLER_H
 #define	ParcoursCONTROLLER_H
 
-#include "Controller.h"
+#include "Utils/Controller.h"
 #include "neuralnets/SimplePerceptron.h"
 #include "activationfunctions/ActivationFunctionTanh.h"
 
