@@ -1,25 +1,21 @@
 CC           = g++
 CCFLAGS      = -Wall -ggdb 
-LDFLAGS      = -Lusr/log4cpp/lib -llog4cpp -L/home/bweel/lib -lSDL_image -lSDL_ttf -lSDL 
+LDFLAGS      = -Lusr/log4cpp/lib -llog4cpp -L/home/bweel/lib -lgsl -lgslcblas -lrt -lSDL_image -lSDL_ttf -lSDL 
 RM           = rm -f 
 MAKE         = make
-#
-# Specify the GSL home directory, such that it can be included 
-#
-GSL_HOME	 = /usr/lib/libgsl
 
 #
 # This path has been changed to include the liolib headers
 #
-INCLUDE      = -I$(GSL_HOME)/include -Iinclude/ext -Iinclude/contrib -Iinclude/core -Iprj/ -Iinclude/contrib/LioLib/lioutilities -Iinclude/contrib/LioLib/lioneuralnet -Iinclude/contrib/LioLib/liobehaviorlib -Iinclude/contrib/LioLib/liogenetics 
+INCLUDE      = -I$(GSL_HOME)/include -Iinclude/ext -Iinclude/contrib -Iinclude/core -Iprj/ -Ilib/LioLib/lioutilities -Ilib/LioLib/lioneuralnet 
 SRC_C	     = $(wildcard src/core/*.c src/contrib/*.c src/ext/*.c prj/**/src/*.c)
 
 #
 # This path has been changed to  compile all sources in the contrib and ext subdirectories
 #
-SRC_CC	     = $(wildcard src/core/*.cpp src/contrib/*.cpp src/contrib/**/*.cpp include/contrib/LioLib/liobehaviorlib/src/*.cpp\
-include/contrib/LioLib/lioneuralnet/src/*.cpp include/contrib/LioLib/lioutilities/src/*.cpp src/ext/*.cpp src/ext/**/*.cpp prj/**/src/*.cpp)
-INCLUDE_H = $(wildcard include/core/**/*.h include/contrib/*.cpp include/contrib/**/*.h include/contrib/LioLib/liobehaviorlib/behaviors/*.h\
+SRC_CC	     = $(wildcard src/core/*.cpp src/contrib/*.cpp src/contrib/**/*.cpp src/contrib/**/**/*.cpp lib/LioLib/lioneuralnet/src/*.cpp\
+lib/LioLib/lioutilities/src/*.cpp src/ext/*.cpp src/ext/**/*.cpp prj/**/src/*.cpp prj/**/src/**/*.cpp)
+INCLUDE_H = $(wildcard include/core/**/*.h include/contrib/*.cpp include/contrib/**/*.h\
 include/contrib/LioLib/lioneuralnet/**/*.h include/contrib/LioLib/lioutilities/**/*.h include/ext/**/*.h include/ext/*.h prj/**/include/*.h)
 OBJ          = $(SRC_C:.c=.o) $(SRC_CC:.cpp=.o)
 TARGET       = roborobo
