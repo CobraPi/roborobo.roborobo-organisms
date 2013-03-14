@@ -1,0 +1,152 @@
+#
+# Properties for roborobo
+# title   : default parameters
+# date    : 2009 03 31
+# details : (draft version for the properties file)
+#
+
+# object information (these are c++ object -- note: how to parameterize these?)
+
+# (!!!) Check roborobo.h for setting the correct objects (needs re-compiling) -- including inclusion of this file.
+
+# general file information
+
+gLogFilename =						logs/log.txt
+gLogCommentText  = 					(under-development)
+
+gAgentMaskImageFilename =			data/miniagent-mask.png
+gAgentSpecsImageFilename =			data/miniagent-specs.png
+gForegroundImageFilename =			data/simple_foreground-2.png
+gEnvironmentImageFilename =			data/simple_environment-2.png
+gBackgroundImageFilename =			data/simple_background-2.png			
+gStoryZonesImageFilename =			data/simple_storyzones.png
+gStoryZoneCaptionPrefixFilename =	data/danger_story
+
+# general purpose
+
+gRandomSeed = 						-1
+
+gVerbose = 					false #		true     # debug. otw: false
+gBatchMode = 						false
+
+gFramesPerSecond = 					60
+
+gParallaxFactor = 					1
+
+# general data
+
+gNbOfAgents = 				1
+
+gDisplayZoneCaption = 				false
+
+gPauseMode = 						false
+gInspectorMode = 					false
+gInspectorAgent = 					false
+
+ConfigurationLoaderObjectName = ReplayConfigurationLoader
+
+gEnergyInit = 100 # di1103 100 # could be less. but avoid more. aggressive version is 100, conservative is 400. (1/4th of lifetime for genome to proove itself worth at start-up)
+gEnergyMax = 400 # di1103 400 # intrisic constraint: >= gEnergyInit -- light constraint over gEnergyRevive as gEnergyMax is not considered if agent not active
+gEnergyRevive = 500 # di1103 500 # gEvaluationTime < ... < gEvaluationTime*2  # include one lifetime waiting for insemination + time left for new genome to proove itself worth.
+# artificial neural net
+nbLayer = 1 #should always remain to 1
+nbHiddenNeurons = 5
+
+gEnergyMode = true
+gEnergyPolar = false
+
+gMaxEnergyPoints = 400 #di123h28 1000 # vd1638:800
+gEnergyPointSize = 10.0 #di123h28 16.0 # di0254: 8.0 # vd1638:10.0
+gEnergyPointValue = 100 # di12h27 300 # vd1638:100.0   # CEC: 50.0 -- 300, depends also on agent lifetime and respawnlag.
+gRespawnLag = 600 # je23h27=100 # CEC: 10 et aussi delai dans energypoint
+
+gZoneEnergy_maxHarvestValue = 100
+gZoneEnergy_minHarvestValue = 1.1
+gZoneEnergy_maxFullCapacity = 10
+gZoneEnergy_saturateCapacityLevel = 40
+gMaxPenalizationRate = 0.5
+
+VisibleEnergyPoint = true
+
+gEnergyPoints_alwaysRender = false
+
+g_xStart_EnergyZone = 0 #700
+g_yStart_EnergyZone = 212 #0
+g_xEnd_EnergyZone = 1023
+g_yEnd_EnergyZone = 535
+
+
+# if respawnlag>0, use non locked version.
+
+VisibleLockedEnergyPoint = true
+initLock = 0.0
+iterationMax = 40
+
+# general parameters for the self-adaptive alg. and experiment
+
+gAgentCounter = 					0
+gAgentIndexFocus = 					0
+
+gScreenWidth = 						1024
+gScreenHeight = 					536
+
+
+gMoveStepWidth = 					1
+gMoveStepHeight = 					1
+
+gInspectorAgentXStart =				100
+gInspectorAgentYStart =				355
+
+# agent dynamics and structure
+
+gMaxTranslationalSpeed = 			2  # vdi22h33: 2 -- should be 2 to correctly handle collision, btw. -- froce to 10 so as to ensure variety of behavior.
+gMaxTranslationalDeltaValue =		2 	# value btw 0 and gMaxRotationalSpeed
+gMaxRotationalSpeed = 				30 # 2
+gSensorRange = 			64 #			128 # debug. otw: 32 
+
+gMaxSpeedOnXaxis = 					2
+gMaxSpeedOnYaxis = 					10
+
+gLocomotionMode = 					0
+
+gInspectAgent = 					false
+
+SlowMotionMode =					false
+
+gAgentRegistration = 				true
+
+gNiceRendering = 					true
+
+gDisplayMode =				0
+gFastDisplayModeSpeed = 			60
+
+gUserCommandMode = 					false
+
+# not used
+gAgentWidth =						0
+gAgentHeight =						0
+gAreaWidth = 						0
+gAreaHeight = 						0
+
+
+
+# radio com network info
+
+gRadioNetwork = 					true
+gMaxRadioDistance = 	 16 # lu1200 24 # di02h32: 16 # vdi16h10 128 # vd08h51 64 # 128 # debug - otw: 32 # true value (in pixels). - default advised value is the sensor range (e.g. 32)
+
+# danger zone specific parameters (not be displayed in debug.properties)
+
+DangerZone_InfluenceRadius 						100
+DangerZone_RobotDensityThreshold				2
+DangerZone_MaximumVelocityPenalizationFactor	0.5
+
+# agent starting location
+
+agent[0].x = 300
+agent[0].y = 300
+agent[0].orientation = 90
+
+
+
+

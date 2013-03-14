@@ -1,0 +1,14 @@
+set key box 
+set key below
+set pointsize 1
+#set boxwidth 0.7 absolute
+set boxwidth 3.0 absolute
+
+
+set yrange [ 0.00000 : 70.0000 ] noreverse nowriteback
+
+
+set datafile separator "," 
+set title "Size of the genomes list over 11 runs, by using sigmaRef(0.3)"
+
+set term postscript eps color "Times-Roman" 20 enhanced

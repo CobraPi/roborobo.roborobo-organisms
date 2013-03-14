@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/Agents/SymbrionRobotAgent.cpp"
+         timestampString = "383575920.147981"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "12"
+         endingLineNumber = "12"
+         landmarkName = "SymbrionRobotAgent::SymbrionRobotAgent(AgentState state, World *__world)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "i==11"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383566255.896586"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
+         landmarkName = "SymbrionWorldObserver::updateWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "__organism == NULL"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "383564544.736275"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1019"
+         endingLineNumber = "1019">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "383564544.736275"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1018"
+         endingLineNumber = "1018">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "include/core/Agents/RobotAgent.h"
+         timestampString = "384961141.011855"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "class RobotAgent"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "383564544.736275"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1002"
+         endingLineNumber = "1002">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "383564544.736275"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1020"
+         endingLineNumber = "1020">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383578271.193997"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "256"
+         endingLineNumber = "256"
+         landmarkName = "SymbrionWorldObserver::loadFiles()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383578271.193997"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
+         landmarkName = "SymbrionWorldObserver::boardcastSeed(int index)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "nearRobots.size()&gt;0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383578271.193997"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "185"
+         endingLineNumber = "185"
+         landmarkName = "SymbrionWorldObserver::boardcastSeed(int index)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "i==11"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383566255.896586"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
+         landmarkName = "SymbrionWorldObserver::updateWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "worldModel-&gt;_agentId==11"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionControlArchitecture.cpp"
+         timestampString = "384961141.011855"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "SymbrionControlArchitecture::step()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "worldModel-&gt;_agentId==11"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionControlArchitecture.cpp"
+         timestampString = "384961141.011855"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "SymbrionControlArchitecture::step()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionControlArchitecture.cpp"
+         timestampString = "384961141.011855"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "SymbrionControlArchitecture::step()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "i==11"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383569580.26301"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "SymbrionWorldObserver::updateWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "i==8"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Symbrion/src/SymbrionWorldObserver.cpp"
+         timestampString = "383569608.038203"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "SymbrionWorldObserver::updateWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         condition = "shuffledIndex[i]==84"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "198"
+         endingLineNumber = "198"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/contrib/Organism.cpp"
+         timestampString = "383578599.523453"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "Organism::addRobot(RobotAgentPtr robot)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Parcours/src/ParcoursController.cpp"
+         timestampString = "384963407.452502"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
+         landmarkName = "ParcoursController::createOrganism(double &amp;left, double &amp;right, int desired_size, double speed)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Parcours/src/ParcoursController.cpp"
+         timestampString = "384963407.452502"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "ParcoursController::step(double &amp;left, double &amp;right)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "prj/Parcours/src/ParcoursController.cpp"
+         timestampString = "384963407.452502"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "ParcoursController::step(double &amp;left, double &amp;right)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "World::initWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
+         landmarkName = "World::initWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "435"
+         endingLineNumber = "435">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "World::initWorld()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384961355.757431"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "17"
+         endingLineNumber = "17"
+         landmarkName = "World::World()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/roborobo.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1419"
+         endingLineNumber = "1419"
+         landmarkName = "runRoborobo(int __maxIt)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/World.cpp"
+         timestampString = "384964675.099735"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
+         landmarkName = "World::updateWorld(Uint8 *__keyboardStates)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/ext/BehaviorControlArchitectures/EvolutionaryControlArchitecture.cpp"
+         timestampString = "384963404.31367"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
+         landmarkName = "EvolutionaryControlArchitecture::step()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384963592.700823"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "491"
+         endingLineNumber = "491">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384963855.340458"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
+         landmarkName = "RobotAgent::move(int __recursiveIt)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384963856.318519"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
+         landmarkName = "RobotAgent::move(int __recursiveIt)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384963886.658393"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "340"
+         endingLineNumber = "340"
+         landmarkName = "RobotAgent::move(int __recursiveIt)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgentWorldInterface.cpp"
+         timestampString = "384964180.077649"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "RobotAgentWorldInterface::applyInternalDynamics( RobotAgentWorldModel *__wm )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384964208.460861"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "320"
+         endingLineNumber = "320"
+         landmarkName = "RobotAgent::applyDynamics()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgent.cpp"
+         timestampString = "384964209.460642"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "RobotAgent::applyDynamics()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgentWorldInterface.cpp"
+         timestampString = "384964286.937512"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "RobotAgentWorldInterface::applyInternalDynamics( RobotAgentWorldModel *__wm )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/RobotAgentWorldInterface.cpp"
+         timestampString = "384964287.667494"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "39"
+         endingLineNumber = "39"
+         landmarkName = "RobotAgentWorldInterface::applyInternalDynamics( RobotAgentWorldModel *__wm )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/core/roborobo.cpp"
+         timestampString = "384964374.466205"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1364"
+         endingLineNumber = "1364"
+         landmarkName = "initRoborobo()"
+         landmarkType = "7">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>

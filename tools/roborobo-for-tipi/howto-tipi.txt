@@ -1,0 +1,56 @@
+=========================
+= ROBOROBO KIT FOR TIPI =
+=========================
+
+## Quick intro ##
+
+This file and directory should be useful for people working at LRI / Univ. Paris-Sud and 
+wishing to run their roborobo code on the "tipi" cluster. More generaly, it may be useful
+for anyone wishing to run roborobo on a linux machine with restricted rights, as it describes
+how to compile and run roborobo with a local installation of the mandatory SDL library.
+
+## Install ##
+
+0 - uncompress sdl_files.tgz
+
+1 - move sdl directory wherever you want
+
+      e.g.: /users/dsa/bredeche
+
+2 - move Makefile.tipi in your roborobo directory
+
+3 - modify Makefile.tipi for matching with sdl directory location
+
+      replace <FULL_PATH_TO_SDL_LIB_HERE>
+        e.g. /users/dsa/bredeche/sdl/lib
+      replace <FULL_PATH_TO_SDL_INCLUDE_HERE>
+        e.g. /users/dsa/bredeche/sdl/include
+
+4 - modify your ~/.bashrc (or equivalent) to add path to sdl lib directory to LD_LIBRARY_PATH:
+
+      e.g.: add "export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":<FULL_PATH>/sdl/lib"
+	OR "setenv LD_LIBRARY_PATH "$LD_LIBRARY_PATH":<FULL_PATH>/sdl/lib"
+
+
+## Usage ##
+
+  make -f Makefile.tipi
+  ./roborobo-tipi -l <myconfigfile>
+
+if you want to launch an experiment and disconnect:
+  1. set gBatchmode to true in the config file
+  2. launch "nohup ./roborobo-tipi -l config/<myconfigfile> &"
+
+
+## Contents ##
+
+- howto-tipi.txt: see how-tipi.txt for description
+- Makefile.tipi: makefile for generating a tipi-compliant binary
+- sdl/: the necessary SDL files.
+	sdl/include: contains SDL include files
+	sdl/lib: contains SDL lib files
+
+History:
+
+- 20100???: created (by Pierre Delarboulas)
+- 20100629: cleaned and added howto-tipi.txt (Nicolas)

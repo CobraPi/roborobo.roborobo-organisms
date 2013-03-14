@@ -1,0 +1,763 @@
+#
+# Properties for roborobo
+# title   : Two-colours MONEE template
+# date    : 29/11/2012 15:11
+# details : (draft version for the properties file)
+#
+
+# object information (these are c++ object -- note: how to parameterize these?)
+
+# (!!!) Check roborobo.h for setting the correct objects (needs re-compiling) -- including inclusion of this file.
+
+# general file information
+
+puckEnergy = 0
+puckRadius = 1
+puckMaxAge = 100
+puckEnergy = 100
+
+gRandomSelection = true 
+
+gUseMarket = true
+gSpecialisation = false
+gUseSpecBonus = false
+gSelectionPressure = 1.75
+
+gColorChangeTarget = 1
+gColorChangeIteration = 1000000
+gMaxIt = 50000
+
+gLogFilename = logs/output.20121221.13h00m28s.6171.log
+gCollisionLogFilename = logs/collision.20121221.13h00m28s.6171.log
+gLogCommentText = (under-development)
+
+gAgentMaskImageFilename = data/miniagent-mask.png
+gAgentSpecsImageFilename = data/miniagent-specs.png
+gForegroundImageFilename = data/simple_foreground_2.png
+gEnvironmentImageFilename = data/simple_environment_2.png
+gBackgroundImageFilename = data/simple_background_2.png
+gZoneImageFilename = data/simple_zones_2.png
+gZoneCaptionPrefixFilename = data/zonecaption
+
+gScreenWidth = 1024
+gScreenHeight = 1024
+
+gNbOfAgents = 100 # Coordinates calculated for up to 150 agents
+
+# agent dynamics and structure
+gMaxTranslationalSpeed = 2
+gMaxTranslationalDeltaValue = 2     # value btw 0 and gMaxRotationalSpeed
+gMaxRotationalSpeed = 30
+gSensorRange = 20
+
+gMaxSpeedOnXaxis = 10
+gMaxSpeedOnYaxis = 10
+
+gLocomotionMode = 0
+
+# radio com network info
+gMaxRadioDistance = 27
+gRadioNetwork = true
+
+#show screen or not 
+#true -> do not show screen
+#false -> show screen
+gBatchMode = true
+
+gUseOrganisms = false
+gEnergyMode = true
+
+gMaxCommDist = 27
+
+gMaxGenePool = 50
+gMaxLifetimeGathering = 2000
+gMaxLifetimeMating = 200
+gHiddenNeuronCount = 0
+
+gPuckColors = 2
+
+puckGen[0].xMean  = 0.5
+puckGen[0].yMean  = 0.5
+puckGen[0].xSigma = 0.5
+puckGen[0].ySigma = 0.5
+puckGen[0].count  = 150
+
+puckGen[1].xMean  = 0.5
+puckGen[1].yMean  = 0.5
+puckGen[1].xSigma = 0.50
+puckGen[1].ySigma = 0.50
+puckGen[1].count  = 150
+
+gTask1Premium = 1.0
+
+gEnergyPointRadius = 10
+gEnergyPointValue = 10
+gEnergyPointRespawnLagMaxValue = 10
+gEnergyPoints_alwaysRender = false
+initLock = 10
+iterationMax = 100
+VisibleEnergyPoint = true
+gMaxEnergyPoints = 100
+gVideoRecording = false
+gDisplaySensors = true
+gRiverbed = false
+
+ConfigurationLoaderObjectName = MONEEConfigurationLoader
+gPauseMode = false
+gInspectorMode = false
+gInspectorAgent = false
+gAgentCounter = 0
+gAgentIndexFocus = 0
+gDisplayZoneCaption = false
+gInspectAgent = false
+SlowMotionMode = false
+gAgentRegistration = true
+gNiceRendering = true
+gDisplayMode = 0
+gFastDisplayModeSpeed = 60
+gUserCommandMode = false
+gRandomSeed = 0
+gVerbose = false
+gFramesPerSecond = 60
+gParallaxFactor = 1
+
+gMoveStepWidth =                    1
+gMoveStepHeight =                   1
+
+gInspectorAgentXStart =             300
+gInspectorAgentYStart =             300
+
+# not used
+gAgentWidth = 0
+gAgentHeight = 0
+gAreaWidth = 0
+gAreaHeight = 0
+
+
+
+# agent starting location
+
+agent[0].x = 200
+agent[0].y = 420
+agent[0].orientation = 90
+
+agent[1].x = 200
+agent[1].y = 435
+agent[1].orientation = 90
+
+agent[2].x = 200
+agent[2].y = 450
+agent[2].orientation = 90
+
+agent[3].x = 200
+agent[3].y = 465
+agent[3].orientation = 90
+
+agent[4].x = 200
+agent[4].y = 480
+agent[4].orientation = 90
+
+agent[5].x = 200
+agent[5].y = 495
+agent[5].orientation = 90
+
+agent[6].x = 200
+agent[6].y = 510
+agent[6].orientation = 90
+
+agent[7].x = 200
+agent[7].y = 525
+agent[7].orientation = 90
+
+agent[8].x = 200
+agent[8].y = 540
+agent[8].orientation = 90
+
+agent[9].x = 200
+agent[9].y = 555
+agent[9].orientation = 90
+
+agent[10].x = 200
+agent[10].y = 570
+agent[10].orientation = 90
+
+agent[11].x = 200
+agent[11].y = 585
+agent[11].orientation = 90
+
+agent[12].x = 200
+agent[12].y = 600
+agent[12].orientation = 90
+
+agent[13].x = 215
+agent[13].y = 420
+agent[13].orientation = 90
+
+agent[14].x = 215
+agent[14].y = 435
+agent[14].orientation = 90
+
+agent[15].x = 215
+agent[15].y = 450
+agent[15].orientation = 90
+
+agent[16].x = 215
+agent[16].y = 465
+agent[16].orientation = 90
+
+agent[17].x = 215
+agent[17].y = 480
+agent[17].orientation = 90
+
+agent[18].x = 215
+agent[18].y = 495
+agent[18].orientation = 90
+
+agent[19].x = 215
+agent[19].y = 510
+agent[19].orientation = 90
+
+agent[20].x = 215
+agent[20].y = 525
+agent[20].orientation = 90
+
+agent[21].x = 215
+agent[21].y = 540
+agent[21].orientation = 90
+
+agent[22].x = 215
+agent[22].y = 555
+agent[22].orientation = 90
+
+agent[23].x = 215
+agent[23].y = 570
+agent[23].orientation = 90
+
+agent[24].x = 215
+agent[24].y = 585
+agent[24].orientation = 90
+
+agent[25].x = 215
+agent[25].y = 600
+agent[25].orientation = 90
+
+agent[26].x = 230
+agent[26].y = 420
+agent[26].orientation = 90
+
+agent[27].x = 230
+agent[27].y = 435
+agent[27].orientation = 90
+
+agent[28].x = 230
+agent[28].y = 450
+agent[28].orientation = 90
+
+agent[29].x = 230
+agent[29].y = 465
+agent[29].orientation = 90
+
+agent[30].x = 230
+agent[30].y = 480
+agent[30].orientation = 90
+
+agent[31].x = 230
+agent[31].y = 495
+agent[31].orientation = 90
+
+agent[32].x = 230
+agent[32].y = 510
+agent[32].orientation = 90
+
+agent[33].x = 230
+agent[33].y = 525
+agent[33].orientation = 90
+
+agent[34].x = 230
+agent[34].y = 540
+agent[34].orientation = 90
+
+agent[35].x = 230
+agent[35].y = 555
+agent[35].orientation = 90
+
+agent[36].x = 230
+agent[36].y = 570
+agent[36].orientation = 90
+
+agent[37].x = 230
+agent[37].y = 585
+agent[37].orientation = 90
+
+agent[38].x = 230
+agent[38].y = 600
+agent[38].orientation = 90
+
+agent[39].x = 245
+agent[39].y = 420
+agent[39].orientation = 90
+
+agent[40].x = 245
+agent[40].y = 435
+agent[40].orientation = 90
+
+agent[41].x = 245
+agent[41].y = 450
+agent[41].orientation = 90
+
+agent[42].x = 245
+agent[42].y = 465
+agent[42].orientation = 90
+
+agent[43].x = 245
+agent[43].y = 480
+agent[43].orientation = 90
+
+agent[44].x = 245
+agent[44].y = 495
+agent[44].orientation = 90
+
+agent[45].x = 245
+agent[45].y = 510
+agent[45].orientation = 90
+
+agent[46].x = 245
+agent[46].y = 525
+agent[46].orientation = 90
+
+agent[47].x = 245
+agent[47].y = 540
+agent[47].orientation = 90
+
+agent[48].x = 245
+agent[48].y = 555
+agent[48].orientation = 90
+
+agent[49].x = 245
+agent[49].y = 570
+agent[49].orientation = 90
+
+agent[50].x = 245
+agent[50].y = 585
+agent[50].orientation = 90
+
+agent[51].x = 245
+agent[51].y = 600
+agent[51].orientation = 90
+
+agent[52].x = 260
+agent[52].y = 420
+agent[52].orientation = 90
+
+agent[53].x = 260
+agent[53].y = 435
+agent[53].orientation = 90
+
+agent[54].x = 260
+agent[54].y = 450
+agent[54].orientation = 90
+
+agent[55].x = 260
+agent[55].y = 465
+agent[55].orientation = 90
+
+agent[56].x = 260
+agent[56].y = 480
+agent[56].orientation = 90
+
+agent[57].x = 260
+agent[57].y = 495
+agent[57].orientation = 90
+
+agent[58].x = 260
+agent[58].y = 510
+agent[58].orientation = 90
+
+agent[59].x = 260
+agent[59].y = 525
+agent[59].orientation = 90
+
+agent[60].x = 260
+agent[60].y = 540
+agent[60].orientation = 90
+
+agent[61].x = 260
+agent[61].y = 555
+agent[61].orientation = 90
+
+agent[62].x = 260
+agent[62].y = 570
+agent[62].orientation = 90
+
+agent[63].x = 260
+agent[63].y = 585
+agent[63].orientation = 90
+
+agent[64].x = 260
+agent[64].y = 600
+agent[64].orientation = 90
+
+agent[65].x = 275
+agent[65].y = 420
+agent[65].orientation = 90
+
+agent[66].x = 275
+agent[66].y = 435
+agent[66].orientation = 90
+
+agent[67].x = 275
+agent[67].y = 450
+agent[67].orientation = 90
+
+agent[68].x = 275
+agent[68].y = 465
+agent[68].orientation = 90
+
+agent[69].x = 275
+agent[69].y = 480
+agent[69].orientation = 90
+
+agent[70].x = 275
+agent[70].y = 495
+agent[70].orientation = 90
+
+agent[71].x = 275
+agent[71].y = 510
+agent[71].orientation = 90
+
+agent[72].x = 275
+agent[72].y = 525
+agent[72].orientation = 90
+
+agent[73].x = 275
+agent[73].y = 540
+agent[73].orientation = 90
+
+agent[74].x = 275
+agent[74].y = 555
+agent[74].orientation = 90
+
+agent[75].x = 275
+agent[75].y = 570
+agent[75].orientation = 90
+
+agent[76].x = 275
+agent[76].y = 585
+agent[76].orientation = 90
+
+agent[77].x = 275
+agent[77].y = 600
+agent[77].orientation = 90
+
+agent[78].x = 290
+agent[78].y = 420
+agent[78].orientation = 90
+
+agent[79].x = 290
+agent[79].y = 435
+agent[79].orientation = 90
+
+agent[80].x = 290
+agent[80].y = 450
+agent[80].orientation = 90
+
+agent[81].x = 290
+agent[81].y = 465
+agent[81].orientation = 90
+
+agent[82].x = 290
+agent[82].y = 480
+agent[82].orientation = 90
+
+agent[83].x = 290
+agent[83].y = 495
+agent[83].orientation = 90
+
+agent[84].x = 290
+agent[84].y = 510
+agent[84].orientation = 90
+
+agent[85].x = 290
+agent[85].y = 525
+agent[85].orientation = 90
+
+agent[86].x = 290
+agent[86].y = 540
+agent[86].orientation = 90
+
+agent[87].x = 290
+agent[87].y = 555
+agent[87].orientation = 90
+
+agent[88].x = 290
+agent[88].y = 570
+agent[88].orientation = 90
+
+agent[89].x = 290
+agent[89].y = 585
+agent[89].orientation = 90
+
+agent[90].x = 290
+agent[90].y = 600
+agent[90].orientation = 90
+
+agent[91].x = 305
+agent[91].y = 420
+agent[91].orientation = 90
+
+agent[92].x = 305
+agent[92].y = 435
+agent[92].orientation = 90
+
+agent[93].x = 305
+agent[93].y = 450
+agent[93].orientation = 90
+
+agent[94].x = 305
+agent[94].y = 465
+agent[94].orientation = 90
+
+agent[95].x = 305
+agent[95].y = 480
+agent[95].orientation = 90
+
+agent[96].x = 305
+agent[96].y = 495
+agent[96].orientation = 90
+
+agent[97].x = 305
+agent[97].y = 510
+agent[97].orientation = 90
+
+agent[98].x = 305
+agent[98].y = 525
+agent[98].orientation = 90
+
+agent[99].x = 305
+agent[99].y = 540
+agent[99].orientation = 90
+
+agent[100].x = 305
+agent[100].y = 555
+agent[100].orientation = 90
+
+agent[101].x = 305
+agent[101].y = 570
+agent[101].orientation = 90
+
+agent[102].x = 305
+agent[102].y = 585
+agent[102].orientation = 90
+
+agent[103].x = 305
+agent[103].y = 600
+agent[103].orientation = 90
+
+agent[104].x = 320
+agent[104].y = 420
+agent[104].orientation = 90
+
+agent[105].x = 320
+agent[105].y = 435
+agent[105].orientation = 90
+
+agent[106].x = 320
+agent[106].y = 450
+agent[106].orientation = 90
+
+agent[107].x = 320
+agent[107].y = 465
+agent[107].orientation = 90
+
+agent[108].x = 320
+agent[108].y = 480
+agent[108].orientation = 90
+
+agent[109].x = 320
+agent[109].y = 495
+agent[109].orientation = 90
+
+agent[110].x = 320
+agent[110].y = 510
+agent[110].orientation = 90
+
+agent[111].x = 320
+agent[111].y = 525
+agent[111].orientation = 90
+
+agent[112].x = 320
+agent[112].y = 540
+agent[112].orientation = 90
+
+agent[113].x = 320
+agent[113].y = 555
+agent[113].orientation = 90
+
+agent[114].x = 320
+agent[114].y = 570
+agent[114].orientation = 90
+
+agent[115].x = 320
+agent[115].y = 585
+agent[115].orientation = 90
+
+agent[116].x = 320
+agent[116].y = 600
+agent[116].orientation = 90
+
+agent[117].x = 335
+agent[117].y = 420
+agent[117].orientation = 90
+
+agent[118].x = 335
+agent[118].y = 435
+agent[118].orientation = 90
+
+agent[119].x = 335
+agent[119].y = 450
+agent[119].orientation = 90
+
+agent[120].x = 335
+agent[120].y = 465
+agent[120].orientation = 90
+
+agent[121].x = 335
+agent[121].y = 480
+agent[121].orientation = 90
+
+agent[122].x = 335
+agent[122].y = 495
+agent[122].orientation = 90
+
+agent[123].x = 335
+agent[123].y = 510
+agent[123].orientation = 90
+
+agent[124].x = 335
+agent[124].y = 525
+agent[124].orientation = 90
+
+agent[125].x = 335
+agent[125].y = 540
+agent[125].orientation = 90
+
+agent[126].x = 335
+agent[126].y = 555
+agent[126].orientation = 90
+
+agent[127].x = 335
+agent[127].y = 570
+agent[127].orientation = 90
+
+agent[128].x = 335
+agent[128].y = 585
+agent[128].orientation = 90
+
+agent[129].x = 335
+agent[129].y = 600
+agent[129].orientation = 90
+
+agent[130].x = 350
+agent[130].y = 420
+agent[130].orientation = 90
+
+agent[131].x = 350
+agent[131].y = 435
+agent[131].orientation = 90
+
+agent[132].x = 350
+agent[132].y = 450
+agent[132].orientation = 90
+
+agent[133].x = 350
+agent[133].y = 465
+agent[133].orientation = 90
+
+agent[134].x = 350
+agent[134].y = 480
+agent[134].orientation = 90
+
+agent[135].x = 350
+agent[135].y = 495
+agent[135].orientation = 90
+
+agent[136].x = 350
+agent[136].y = 510
+agent[136].orientation = 90
+
+agent[137].x = 350
+agent[137].y = 525
+agent[137].orientation = 90
+
+agent[138].x = 350
+agent[138].y = 540
+agent[138].orientation = 90
+
+agent[139].x = 350
+agent[139].y = 555
+agent[139].orientation = 90
+
+agent[140].x = 350
+agent[140].y = 570
+agent[140].orientation = 90
+
+agent[141].x = 350
+agent[141].y = 585
+agent[141].orientation = 90
+
+agent[142].x = 350
+agent[142].y = 600
+agent[142].orientation = 90
+
+agent[143].x = 365
+agent[143].y = 420
+agent[143].orientation = 90
+
+agent[144].x = 365
+agent[144].y = 435
+agent[144].orientation = 90
+
+agent[145].x = 365
+agent[145].y = 450
+agent[145].orientation = 90
+
+agent[146].x = 365
+agent[146].y = 465
+agent[146].orientation = 90
+
+agent[147].x = 365
+agent[147].y = 480
+agent[147].orientation = 90
+
+agent[148].x = 365
+agent[148].y = 495
+agent[148].orientation = 90
+
+agent[149].x = 365
+agent[149].y = 510
+agent[149].orientation = 90
+
+agent[150].x = 365
+agent[150].y = 525
+agent[150].orientation = 90
+
+agent[151].x = 365
+agent[151].y = 540
+agent[151].orientation = 90
+
+agent[152].x = 365
+agent[152].y = 555
+agent[152].orientation = 90
+
+agent[153].x = 365
+agent[153].y = 570
+agent[153].orientation = 90
+
+agent[154].x = 365
+agent[154].y = 585
+agent[154].orientation = 90
+
+agent[155].x = 365
+agent[155].y = 600
+agent[155].orientation = 90
+

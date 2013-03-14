@@ -1,0 +1,10 @@
+./genExpMedeaTwoSuns.sh > run_exp_two-suns.sh
+
+dont forget to clean the logs directory before launching (otw all files will be moved to the firstsubdir created)
+
+
+
+./compileResults exp1_1 AllMyExps
+
+copy content of logs directory from exp1_1 to AllMyExps, respecting subdir structure (two-suns dirs).
+useful if you want to gather logs from several directory 

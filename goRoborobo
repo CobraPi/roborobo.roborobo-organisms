@@ -1,0 +1,18 @@
+#! /bin/tcsh
+
+if ($# != 2 ) then
+echo USAGE: ./goRoborobo NB_OF_EXP CONFIG_FILE
+else
+	set cnt=1
+	set cntMax=$1
+	while ( $cnt <= $cntMax )
+		echo =-=-=-=-=-=
+		echo Exp. $cnt of $cntMax
+		echo =-=-=-=-=-=
+		./roborobo -l $2
+		@ cnt++
+		echo -
+	end
+endif
+
+

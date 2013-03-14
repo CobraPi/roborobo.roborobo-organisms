@@ -1,0 +1,10 @@
+rm -f datalog_*.txt
+rm -f properties*.txt
+rm -f screenshot_*.bmp
+rm -f extract.dat*
+rm -f *.eps
+rm -f genomes*.log
+rm -f organism-sizes*.log
+rm -f organisms*.log
+rm -f output*.log
+rm -f location*.log

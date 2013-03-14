@@ -1,0 +1,36 @@
+CC           = g++ 
+CCFLAGS      = -Wall 
+# LDFLAGS      = `sdl-config --cflags --libs` -lSDL_image -L~/sdl/lib  ##
+LDFLAGS      = -D_GNU_SOURCE=1 -D_REENTRANT -lSDL_image -L<FULL_PATH_TO_SDL_LIB_HERE>
+RM           = rm -f 
+MAKE         = make -f Makefile.tipi
+INCLUDE      = -Iinclude/ext -Iinclude/contrib -Iinclude/core -Iprj -I<FULL_PATH_TO_SDL_INCLUDE_HERE>
+SRC_C	     = $(wildcard src/core/*.c src/contrib/*.c src/ext/*.c prj/**/src/*.c)
+SRC_CC	     = $(wildcard src/core/*.cpp src/contrib/*.cpp src/ext/*.cpp prj/**/src/*.cpp)
+OBJ          = $(SRC_C:.c=.o) $(SRC_CC:.cpp=.o)
+TARGET       = roborobo-tipi
+
+.IGNORE: 
+#.SILENT: 
+
+all: 
+	clear
+	$(MAKE) distclean
+	$(MAKE) $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CC) -o $@ -c $< $(CCFLAGS) $(INCLUDE)
+
+%.o: %.c
+	$(CC) -o $@ -c $< $(CCFLAGS) $(INCLUDE)
+
+clean:
+	$(RM) $(OBJ) 
+
+distclean:
+	$(MAKE) clean 
+	$(RM) $(TARGET) 
+

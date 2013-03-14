@@ -1,0 +1,15 @@
+#! /bin/tcsh
+
+if ($# < 2) then
+echo USAGE: ./go NB_OF_EXP PREFIX_OF_EXEC NAME_OF_EXP
+else
+	set cnt=0
+	while ( $cnt < $1 )
+		#%echo -n "$cnt "
+		./roborobo-$2 -l config/PPSN-ni.properties
+		mv logs/log.txt logs/log-exp$3-$cnt.log
+		@ cnt++
+	end
+endif
+
+
