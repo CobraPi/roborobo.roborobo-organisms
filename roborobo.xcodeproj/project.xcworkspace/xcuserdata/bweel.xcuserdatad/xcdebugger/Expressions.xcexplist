@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "updateDisplay():roborobo.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "DifferentialControlArchitecture::setSpeed(double, double):DifferentialControlArchitecture.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SymbrionWorldObserver::boardcastSeed(int):SymbrionWorldObserver.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "old-&gt;getOrganism()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SymbrionOrganismGenome::isComplete():SymbrionOrganismGenome.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_coords.end()">
+            </PersistentString>
+            <PersistentString
+               value = "this-&gt;_index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ParcoursController::move(double&amp;, double&amp;, double, double):ParcoursController.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "World::initWorld():World.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SymbrionControlArchitecture::step():SymbrionControlArchitecture.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SymbrionWorldObserver::updateWorld():SymbrionWorldObserver.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "getAgent(i)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RobotAgent::move(int):RobotAgent.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "RobotAgent::applyDynamics():RobotAgent.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

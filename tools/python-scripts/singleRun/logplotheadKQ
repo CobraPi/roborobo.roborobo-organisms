@@ -1,0 +1,12 @@
+
+set key box 
+set key below
+set pointsize 1
+set boxwidth 5 absolute
+
+set datafile separator "," 
+set title "Analysis of a run"
+
+set yrange [-10:75]
+
+set term postscript eps color "Times-Roman" 20

@@ -1,0 +1,13 @@
+#! /bin/tcsh
+
+if ($# < 1) then
+echo USAGE: ./mkall NAME_OF_DIR_WITHOUT_SLASH
+echo  - log files must be in a sub-directory of specified directory
+else
+./globalListSize.py -s 1 -d $1 -A -o $1/plot-$1-activeCount.eps
+./globalListSize.py -s 1 -d $1 -E -o $1/plot-$1-deltaEnergy.eps
+./globalListSize.py -s 1 -d $1 -S -o $1/plot-$1-sigmaValues.eps
+./globalListSize.py -s 1 -d $1 -L -o $1/plot-$1-listGenomeSize.eps
+endif
+
+

@@ -1,0 +1,18 @@
+set key box 
+set key below
+set pointsize 1
+
+#set boxwidth 0.7 absolute
+set boxwidth 1.0 absolute
+
+set yrange [ -300.00000 : 250.0000 ] noreverse nowriteback
+
+
+set datafile separator "," 
+set title "average energy balance per agent"
+
+set label 1 "energy gain/loss" center rotate by 90 at graph 0, graph 0.5 offset -5
+
+set xlabel "generations"
+
+set term postscript eps color "Times-Roman" 20 enhanced

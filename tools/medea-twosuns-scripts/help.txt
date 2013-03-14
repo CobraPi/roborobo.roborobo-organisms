@@ -1,0 +1,27 @@
+#
+# Collection of scripts for tracing heatmaps to monitor 
+# orientation and distance of agents wrt. center of envt.
+#
+# Scripts used in the medea two-suns experiment (2010 06).
+#
+
+useful scripts:
+- monorun_*: heatmaps for one single datafile
+- manyruns_*: heatmaps for many datafiles at once (compile/aggregate)
+
+howto:
+- monorun_traceAll mydatafile.txt
+- manyruns_traceAll prefixeofmydatafile*    # note the "*" joker character
+
+hint:
+- as of 2010 06 27 monorun-* and manyruns-* scripts produce identical outputs (including labels and titles) if there is only one datafile as input (e.g. manyruns_traceAll mydatafile.txt). The only difference is that manyruns still run a python script to aggregate files (which would be useless in this specific case). You may want to use only manyruns-* scripts and ignore monoruns-* script until further notice.
+./allruns_extractData.sh tmp 100 198
+
+
+
+other scripts:
+
+manyruns_makeonedir_batchAll.sh and manyruns_makeonedir.sh: build figures out of a dir. NOTE THAT THERE IS CURRENTLY A LIMITATION AS IT ONLY HANDLES THE FIRST FILE OF THE DIR. (MCMDS)
+
+allruns_countSurvivors.sh : compte le nombre de runs sans extinction (structure de repertoire MCMDS)
+

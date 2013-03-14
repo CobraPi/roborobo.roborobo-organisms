@@ -1,0 +1,4 @@
+./globalListSize.py -s 1 -l
+mandatory: put the .log files in a subdirectory
+
+note: as of 2010 07 06, "./mkAll ." works, but not "./mkAll <nameofsubdir>" ... :-/

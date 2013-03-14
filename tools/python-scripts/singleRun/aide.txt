@@ -1,0 +1,1 @@
+./swarmAnalyzeLogLQ.py -f ./log.log -s 50

@@ -1,0 +1,43 @@
+[20100527::r1016]
+- Major refactoring, including introducing PRJ directories
+
+[20090604::r155]
+- RobotAgentWorldInterfaceDangerWorld.cpp/h: danger zone parameters are loaded from properties files.
+- Misc.cpp/h: created functions getEuclidianDistance(...) and getSquaredEuclidianDistance(...)
+- dangerzone.properties: added danger-zone specific parameters
+- switch from using Properties class to ExtendedProperties class
+- created ExtendedProperties.cpp/h
+
+[20090603::r154]
+- **TODO item**: in RobotAgentWorldInterfaceDangerWorld, hard-coded parameter for velocity penalization in danger zone
+- RobotAgentWorldModel: created... 
+   _robotNeighborhoodCounter (class private field)
+   method getWorld()
+   methods setRobotNeighborhoodCounter, incRobotNeighborhoodCounter and getRobotNeighborhoodCounter
+   methods getXReal() and getYReal()
+- RobotAgent: created method getWorldModel()
+- roborobo.cpp: the main World instance turns global scope (gWorld)
+
+[20090602::r153]
+- include/core/World/World.h: add prototype declaration "class RobotAgent;"
+- RobotAgentWorldInterfaceDangerWorld.h: minor corrections (pre-processor name was wrong, Xcode was tolerant, not make/linux)
+- Makefile: added RobotAgentWorldInterfaceDangerWorld.o in OBJS
+
+[20090601::r151]
+- RobotAgentWorldInterfaceDangerWorld.cpp: implement danger zone
+- added RobotAgentWorldInterfaceDangerWorld class as a friend in RobotAgentWorldModel.h
+- created RobotAgentWorldInterfaceDangerWorld.cpp/h
+- created include/ext/World/
+
+[20090529::r148]
+- roborobo.cpp/h and RobotAgent.cpp: added gMaxTranslationDeltaValue (parameter value set in properties file)
+- RobotAgent.cpp: rename updateDeltaPosition() to applyDynamics()
+- src/core/SDL_gfxRoborobo.cpp, l.19: explicit cast to (char*) (remove cast warning)
+- created include/core/World directory
+- World.h: move from include/core/RoboroboMain to include/core/World
+- RobotAgentWorldInterface.h: created in include/core/World
+
+[20090528::r135]
+- RobotAgentWorldModel.cpp: refactor translation/rotational desired and actual variable names
+- robotAgent.cpp: change _wm->_actualTranslationalValue update (= _wm->_agentAbsoluteLinearSpeed instead of  _wm->_desiredTranslationalValue, as the desired value may not be reachable due to physical limitations)
+- RobotAgent::updateDeltaPosition(): rewrite.
