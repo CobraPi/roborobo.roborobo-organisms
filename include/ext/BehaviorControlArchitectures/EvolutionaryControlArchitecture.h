@@ -17,7 +17,7 @@
 
 #include "RoboroboMain/common.h"
 #include "RoboroboMain/roborobo.h"
-#include "DifferentialControlArchitecture.h"
+#include "BehaviorControlArchitectures/DifferentialControlArchitecture.h"
 #include "WorldModels/RobotAgentWorldModel.h"
 
 #include "Utils/Rand.h"

@@ -7,7 +7,7 @@
  *
  */
 
-#include "DifferentialControlArchitecture.h"
+#include "BehaviorControlArchitectures/DifferentialControlArchitecture.h"
 
 const double DifferentialControlArchitecture::maxSpeed = (0.05 * PIXELSPERMETER) / TICKSPERSECOND; // 0.05 m/s, converted to pixels/tick
 
