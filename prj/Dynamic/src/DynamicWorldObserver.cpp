@@ -12,11 +12,6 @@
 #include "World/TypedEnergyPoint.h"
 #include "SDL_collide.h"
 
-
-// Jan-Willem: Use this function from RobotAgent.cpp to show text for analysis/debugging
-int RenderTextToSurface(std::string Text, int x, int y, SDL_Surface *Dest, SDL_Color *TXT_Color);
-
-
 DynamicWorldObserver::DynamicWorldObserver(World *__world) : WorldObserver(__world) {
 	_world = __world;
 }
