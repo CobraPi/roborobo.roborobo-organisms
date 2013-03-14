@@ -6,7 +6,7 @@
 //
 //
 
-#include "WallAvoidanceBehavior.h"
+#include "Behavior/WallAvoidanceBehavior.h"
 
 void WallAvoidanceBehavior::step(RobotAgentWorldModel *_wm){
     // a basic obstacle avoidance behavior
