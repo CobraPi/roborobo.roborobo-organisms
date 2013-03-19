@@ -1,6 +1,6 @@
 #include "Sensor/DefaultSensors.h"
 #include "World/EnergyPoint.h"
-
+#include "Agents/RobotAgent.h"
 #include "Utilities/SDL_gfxPrimitivesExtra.h"
 
 DefaultSensors::DefaultSensors(){
