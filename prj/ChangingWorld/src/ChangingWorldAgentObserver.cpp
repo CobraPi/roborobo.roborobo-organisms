@@ -39,6 +39,6 @@ void ChangingWorldAgentObserver::step()
 			orgSize = agent->getOrganism()->size();
 			orgId = agent->getOrganism()->getId();
 		}
-		ChangingWorldSharedData::locationLogFile << "," << _wm->_xReal << "," << _wm->_yReal << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << std::endl;
+//		ChangingWorldSharedData::locationLogFile << "," << _wm->_xReal << "," << _wm->_yReal << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << std::endl;
 	}
 }

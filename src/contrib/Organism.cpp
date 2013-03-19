@@ -484,9 +484,9 @@ void Organism::combineVectors(double &angle, double &translation) {
 		RobotAgentWorldModel* worldModel = (*it)->getWorldModel();
 
 		(*it)->applyDynamics();
-
-		(*it)->xReal_old = worldModel->_xReal;
-		(*it)->yReal_old = worldModel->_yReal;
+        
+        Point2d position = worldModel->getPosition();
+        (*it)->oldPosition = position;
         
         if(!gUseOrganismLeader){
             Rx = Rx + worldModel->_agentAbsoluteLinearSpeed * cos(worldModel->_agentAbsoluteOrientation * M_PI / 180);
@@ -533,11 +533,15 @@ void Organism::moveOrganism(double angle, double translation) {
 		if ((*it)->isRegistered()) {
 			(*it)->unregisterAgent();
 		}
+        
+        Point2d position = wm->getPosition();
 
-		wm->_xReal += _xDeltaReal;
-		wm->_yReal += _yDeltaReal;
+		position.x += _xDeltaReal;
+		position.y += _yDeltaReal;
+        
+        wm->setPosition(position);
 
-		(*it)->setCoord((int) wm->_xReal + 0.5, (int) wm->_yReal + 0.5);
+		(*it)->setCoord((int) position.x + 0.5, (int) position.y + 0.5);
 	}
 }
 
@@ -559,9 +563,10 @@ void Organism::rollbackMove() {
 		wm->_desiredTranslationalValue = 0; // cancel any translation order as agent translation speed is set to zero after collision. (note that rotation is still ok)
 		wm->_actualTranslationalValue = 0;
 		wm->_agentAbsoluteLinearSpeed = 0;
-		wm->_xReal = (*it)->xReal_old;
-		wm->_yReal = (*it)->yReal_old;
-		(*it)->setCoord((int) wm->_xReal + 0.5, (int) wm->_yReal + 0.5);
+        
+        Point2d position = (*it)->oldPosition;
+        wm->setPosition(position);
+		(*it)->setCoord((int) position.x + 0.5, (int) position.y + 0.5);
 
 		if (gLocomotionMode == 1) // consider obstacle friction or not for rotation?
 		{
@@ -587,10 +592,7 @@ void Organism::updateSensors() {
 	std::vector<RobotAgentPtr>::iterator it;
 	for (it = agents.begin(); it != agents.end(); it++) {
 		RobotAgentWorldModel *wm = (*it)->getWorldModel();
-
-		for(unsigned int i = 0; i < wm->sensors.size(); i++){
-			wm->sensors.at(i)->update(new Point2d(wm->getXReal(), wm->getYReal()), wm->getAbsoluteOrientation());
-		}
+        wm->updateSensors();
 		// update sensors
 		/*
 		for (int i = 0; i != wm->getDefaultSensors()->getSensorCount(); i++) {
@@ -631,8 +633,9 @@ void Organism::getBaryCenter(double &x, double &y) {
 	std::vector<RobotAgentPtr>::iterator it;
 	for (it = agents.begin(); it != agents.end(); it++) {
 		RobotAgentWorldModel* wm = (*it)->getWorldModel();
-		x += wm->_xReal;
-		y += wm->_yReal;
+        Point2d position = wm->getPosition();
+		x += position.x;
+		y += position.y;
 	}
 	
 	x = x / agents.size();

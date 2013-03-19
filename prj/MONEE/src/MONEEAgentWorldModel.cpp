@@ -19,7 +19,7 @@ MONEEAgentWorldModel::~MONEEAgentWorldModel() {
 void MONEEAgentWorldModel::dumpGenePoolStats() const {
     std::vector<Genome>::const_reverse_iterator itGenome;
     double totalFitness = .0;
-    gLogFile << "EggHatched: (" << gWorld->getIterations() << "; " << _xReal << "; " << _yReal << "); [";   
+    gLogFile << "EggHatched: (" << gWorld->getIterations() << "; " << position.x << "; " << position.y << "); [";
     for (itGenome = _genePool.rbegin(); itGenome < _genePool.rend(); itGenome++) {
         if (itGenome != _genePool.rbegin()) {
             gLogFile << ", ";

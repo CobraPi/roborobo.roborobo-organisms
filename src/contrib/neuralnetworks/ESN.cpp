@@ -18,12 +18,10 @@
 #include <gsl/gsl_blas.h>
 
 
-using namespace Neural;
-
-
 #include <neuralnetworks/tools/RandomGenerator.h>
 #include <neuralnetworks/tools/Eigensystem.h>
 
+using namespace Neural;
 
 
 /* --------------------- ESN --------------------- */

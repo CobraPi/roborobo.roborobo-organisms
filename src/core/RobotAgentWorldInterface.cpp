@@ -83,20 +83,21 @@ void RobotAgentWorldInterface::applyStream(RobotAgentWorldModel *__wm){
 		if(agent->isRegistered()){
 			agent->unregisterAgent();
 		}
-		agent->xReal_old = __wm->_xReal; // backup old position in case of collision
-		agent->yReal_old = __wm->_yReal;
-		__wm->_xReal += _xDeltaReal;
-		__wm->_yReal += _yDeltaReal;
-
-		agent->setCoord((int) __wm->_xReal + 0.5, (int) __wm->_yReal + 0.5);
+        
+		agent->oldPosition = __wm->getPosition(); // backup old position in case of collision
+        Point2d position = agent->oldPosition;
+        
+        position.x += _xDeltaReal;
+        position.y += _yDeltaReal;
+        
+        __wm->setPosition(position);
+		agent->setCoord((int) position.x + 0.5, (int) position.y + 0.5);
 
 		if (agent->isCollision()) {
-			__wm->_xReal = agent->xReal_old;
-			__wm->_yReal = agent->yReal_old;
-			
-			agent->xReal_old = __wm->_xReal;
-			agent->yReal_old = __wm->_yReal;
-			agent->setCoord((int) __wm->_xReal + 0.5, (int) __wm->_yReal + 0.5);
+            position = agent->oldPosition;
+			__wm->setPosition(position);
+            
+			agent->setCoord((int) position.x + 0.5, (int) position.y + 0.5);
 		}
 	}
 }

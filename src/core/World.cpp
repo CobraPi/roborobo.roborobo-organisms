@@ -12,14 +12,24 @@
 #include "Organism.h"
 
 #include "Config/GlobalConfigurationLoader.h"
+#include "ResourceFactory.h"
+#include "EnergyPoint.h"
 
 World::World() {
 	_iterations = 0;
 	_agentsVariation = false;
     _initializeAgents = true;
     _setUpConnections = true;
+    _initializeEnergyPoints = true;
     
 	_worldObserver = gConfigurationLoader->make_WorldObserver(this);
+    resourceFactories = std::vector<ResourceFactoryPtr>();
+    
+//    ResourceFactory<EnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<EnergyPoint>::getInstance();
+//    resourceFactories.push_back(factory);
+//    
+//    ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr typedFactory = ResourceFactory<TypedEnergyPoint>::getInstance();
+//    resourceFactories.push_back(typedFactory);
 }
 
 World::~World() {
@@ -57,21 +67,19 @@ void World::initWorld() {
 	for (int i = 0; i != gAgentCounter; i++)
 		gRadioNetworkArray.at(i).reserve(gAgentCounter);
 
-//	if (gEnergyMode) {
-//		for (int i = 0; i != gMaxEnergyPoints; i++) {
-//			if (gEnergyPointRespawnLagMaxValue > 0) {
-//				EnergyPoint point(i);
-//				gEnergyPoints.push_back(point);
-//			} else {
-//				EnergyPoint point;
-//				gEnergyPoints.push_back(point);
-//			}
-//		}
-//	}
+	if (gEnergyMode && _initializeEnergyPoints) {
+        ResourceFactory<EnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<EnergyPoint>::getInstance();
+		for (int i = 0; i != gMaxEnergyPoints; i++) {
+			ResourceFactory<EnergyPoint>::ResourcePtr point = factory->addResource();
+		}
+        factory->displayResources();
+	}
 
 	if (gUseOrganisms) {
 		Organism::reset();
 	}
+    
+    resourceFactories.clear();
 
 	_worldObserver->reset();
 }
@@ -144,18 +152,11 @@ void World::updateWorld(Uint8 *__keyboardStates) {
 	// update world level observer
 	_worldObserver->step();
 
-	// update energy points status, if needed
-	if (gEnergyMode == true) {
-		for (std::vector<EnergyPoint>::iterator it = gEnergyPoints.begin(); it < gEnergyPoints.end(); it++)
-			it->step();
-
-		/* Nicola -> Maybe there should be another control even if one of the two for cycle is not performed anyway*/
-
-		for (std::vector<std::vector<TypedEnergyPoint> >::iterator it = gTypedEnergyPoints.begin(); it < gTypedEnergyPoints.end(); it++)
-			for (std::vector<TypedEnergyPoint> ::iterator it2 = it->begin(); it2 < it->end(); it2++){
-				it2->step();
-		}
-	}
+	// update world resources
+    for(int i=0; i<resourceFactories.size();i++){
+        resourceFactories[i]->step();
+    }
+    
 
 	// * create an array that contains shuffled indexes. Used afterwards for randomly update agents.
 	//    This is very important to avoid possible nasty effect from ordering such as "agents with low indexes moves first"
@@ -384,12 +385,9 @@ bool World::loadFiles() {
 				putPixel32(gEnvironmentImage, x, y, SDL_MapRGB(gEnvironmentImage->format, 0, 0, pixel & 0x0000FF));
 		}
     
-    if(gEnergyMode) {
-        // Prepare a surface to hold the energy spots so sensors can detect them
-        gEnergyImage = SDL_CreateRGBSurface (gScreen->flags, gAreaWidth, gAreaHeight, gScreen->format->BitsPerPixel, gScreen->format->Rmask, gScreen->format->Gmask, gScreen->format->Bmask, gScreen->format->Amask);
-        SDL_SetColorKey(gEnergyImage, SDL_SRCCOLORKEY, SDL_MapRGB(gEnergyImage->format, 0xFF, 0xFF, 0xFF));
-        SDL_FillRect(gEnergyImage, NULL, SDL_MapRGB(gEnergyImage->format,0xFF, 0xFF, 0xFF));
-    }
+//    if(gEnergyMode) {
+
+//    }
 
 
 	//If everything loaded fine
@@ -448,3 +446,22 @@ void World::setSetUpConnections(bool setUpConnections){
 bool World::getSetUpConnections(){
     return _setUpConnections;
 }
+
+void World::setInitializeEnergyPoints(bool initEnergyPoints){
+    _initializeEnergyPoints = initEnergyPoints;
+}
+
+bool World::getInitializeEnergyPoints(){
+    return _initializeEnergyPoints;
+}
+
+void World::registerResourceFactory(ResourceFactoryPtr factory){
+    if(std::find(resourceFactories.begin(), resourceFactories.end(), factory) == resourceFactories.end()){
+        resourceFactories.push_back(factory);
+    }
+}
+
+void World::unregisterResourceFactory(ResourceFactoryPtr factory){
+    resourceFactories.erase(std::find(resourceFactories.begin(), resourceFactories.end(), factory));
+}
+

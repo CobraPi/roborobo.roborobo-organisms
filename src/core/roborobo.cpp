@@ -127,8 +127,6 @@ int gMaxEnergyPoints = 0;
 double gEnergyPointRadius = 0.0;
 double gEnergyPointValue = 0.0;
 int gEnergyPointRespawnLagMaxValue = 0;
-std::vector<EnergyPoint> gEnergyPoints;
-std::vector<std::vector<TypedEnergyPoint> > gTypedEnergyPoints;
 
 int gAgentCounter = 0;
 int gAgentIndexFocus = 0;
@@ -203,8 +201,6 @@ SDL_Surface *gZoneImage = NULL;
 SDL_Surface *gZoneCaptionImage[256]; // all stories. total depends on max color component value (ie. defined in 0...255)
 bool gZoneStatus[256]; // told stories 
 
-SDL_Surface *gEnergyImage = NULL;
-
 // SDL event handler
 SDL_Event gEvent; //The event structure
 
@@ -247,7 +243,6 @@ void clean_up() {
 	if (gBackgroundImage != NULL)
 		SDL_FreeSurface(gBackgroundImage);
 	SDL_FreeSurface(gZoneImage);
-    SDL_FreeSurface(gEnergyImage);
     
 	for (int i = 0; i != 256; i++)
 		if (gZoneCaptionImage[i] != NULL) SDL_FreeSurface(gZoneCaptionImage[i]);
@@ -468,9 +463,8 @@ bool handleKeyEvent(Uint8 *keyboardStates) {
 						int radiusMax = gAgentWidth > gAgentHeight ? (gAgentWidth + 1) / 2 : (gAgentHeight + 1) / 2; // assume an upper bound for dimension.
 						for (int i = 0; i != gAgentCounter; i++) // test for agents proximity based on localization 
 						{
-							int x = (int) (gWorld->getAgent(i)->getWorldModel()->getXReal());
-							int y = (int) (gWorld->getAgent(i)->getWorldModel()->getYReal());
-							if (abs(x - xTmp) < radiusMax && abs(y - yTmp) < radiusMax)
+                            Point2d position = gWorld->getAgent(i)->getWorldModel()->getPosition();
+							if (abs(position.x - xTmp) < radiusMax && abs(position.y - yTmp) < radiusMax)
 								std::cout << "\t\tAgent #" << i << " detected (closeby and/or unregistered)." << std::endl;
 						}
 					} else {

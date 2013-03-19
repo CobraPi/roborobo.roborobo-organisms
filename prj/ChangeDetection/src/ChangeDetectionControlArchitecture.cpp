@@ -46,7 +46,7 @@ ControllerPtr ChangeDetectionControlArchitecture::createRandomGenome() {
 double ChangeDetectionControlArchitecture::calculateStepFitness() {
 	ChangeDetectionAgentWorldModel* worldModel = dynamic_cast<ChangeDetectionAgentWorldModel*> (_wm);
 
-	double distance = worldModel->_xReal - worldModel->xStart;
+	double distance = worldModel->getPosition().x - worldModel->xStart;
 	double fitness = distance;
 
 	return fitness;

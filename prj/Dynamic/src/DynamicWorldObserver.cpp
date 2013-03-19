@@ -12,8 +12,11 @@
 #include "World/TypedEnergyPoint.h"
 #include "SDL_collide.h"
 
+typedef ResourceFactory<TypedEnergyPoint>::ResourcePtr TypedEnergyPointPtr;
+
 DynamicWorldObserver::DynamicWorldObserver(World *__world) : WorldObserver(__world) {
 	_world = __world;
+    _world->setInitializeEnergyPoints(false);
 }
 
 DynamicWorldObserver::~DynamicWorldObserver() {
@@ -66,21 +69,26 @@ void DynamicWorldObserver::step() {
 }
 
 void DynamicWorldObserver::initializePlants(){
+    _world->registerResourceFactory(ResourceFactory<TypedEnergyPoint>::getInstance());
+    
     int totPlants = 0;
     yintercept = 20 - 4 * DynamicSharedData::slope;
 //    yintercept = -(DynamicSharedData::NUM_WEIGHTS/2)*DynamicSharedData::slope + DynamicSharedData::fixedPointAmount;
     
-    gTypedEnergyPoints = std::vector<std::vector<TypedEnergyPoint> >();
+    typedEnergyPoints = std::vector<std::vector<ResourceFactory<TypedEnergyPoint>::ResourcePtr > >();
+    ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<TypedEnergyPoint>::getInstance();
     for (int i=0;i<DynamicSharedData::NUM_WEIGHTS;i++){
         int nPlants = DynamicSharedData::slope * i + yintercept;
-        std::vector<TypedEnergyPoint> vec;
-        gTypedEnergyPoints.push_back(vec);
+        std::vector<ResourceFactory<TypedEnergyPoint>::ResourcePtr > vec;
+        typedEnergyPoints.push_back(vec);
         for(int j=0;j<nPlants;j++){
-            TypedEnergyPoint point(0,i); /*TO Check*/
-        	gTypedEnergyPoints[i].push_back(point);
+            ResourceFactory<TypedEnergyPoint>::ResourcePtr point = factory->addResource();
+            point->setType(i);
+        	typedEnergyPoints[i].push_back(point);
             totPlants++;
         }
     }
+    factory->displayResources();
     if(totPlants != DynamicSharedData::NUM_PLANTS){
         std::cerr << "We've created more plants than expected: " << totPlants << " vs. " << DynamicSharedData::NUM_PLANTS << std::endl;
     }
@@ -109,29 +117,31 @@ void DynamicWorldObserver::updatePlants(){
     std::cerr << "Plants per type:";
     int totPlants = 0;
     int sizes[DynamicSharedData::NUM_WEIGHTS];
-    
+
     // Update the number of plants
+    ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<TypedEnergyPoint>::getInstance();
     for (int i=0;i<DynamicSharedData::NUM_WEIGHTS;i++){
         int nPlants = DynamicSharedData::slope * i + yintercept;
-        if(gTypedEnergyPoints[i].size() < nPlants){
-            int newPlants = nPlants - gTypedEnergyPoints[i].size();
+        if(typedEnergyPoints[i].size() < nPlants){
+            int newPlants = nPlants - typedEnergyPoints[i].size();
             for(int j=0;j<newPlants;j++){
-                TypedEnergyPoint point(0,i); /*TO Check*/
-                gTypedEnergyPoints[i].push_back(point);
+                TypedEnergyPointPtr point = factory->addResource();
+                point->setType(i);
             }
-        }else if(gTypedEnergyPoints[i].size() > nPlants){
-            int remPlants = gTypedEnergyPoints[i].size() - nPlants;
+        }else if(typedEnergyPoints[i].size() > nPlants){
+            int remPlants = typedEnergyPoints[i].size() - nPlants;
             for(int j=0;j<remPlants;j++){
-            	gTypedEnergyPoints[i].back().setActiveStatus(false);
-            	gTypedEnergyPoints[i].pop_back();
+            	typedEnergyPoints[i].back()->setActiveStatus(false);
+                factory->removeResource(typedEnergyPoints[i].back());
+                typedEnergyPoints[i].pop_back();
             }
         }
-        totPlants += gTypedEnergyPoints[i].size();
-        sizes[i] = gTypedEnergyPoints[i].size();
-        std::cerr << " " << i << ": " << gTypedEnergyPoints[i].size();
+        totPlants += typedEnergyPoints[i].size();
+        sizes[i] = typedEnergyPoints[i].size();
+        std::cerr << " " << i << ": " << typedEnergyPoints[i].size();
     }
     std::cerr << std::endl;
-    
+  
     // Check if we have exactly NUM_PLANTS plants
     // otherwise add or remove from lowest/highest amount
     if(totPlants > DynamicSharedData::NUM_PLANTS){
@@ -139,14 +149,19 @@ void DynamicWorldObserver::updatePlants(){
         if(sizes[0] > sizes[DynamicSharedData::NUM_WEIGHTS-1]){
             int index = 0;
             for(int i=0;i<excess;i++){
-            	gTypedEnergyPoints[index].pop_back();
+                typedEnergyPoints[i].back()->setActiveStatus(false);
+                factory->removeResource(typedEnergyPoints[i].back());
+            	typedEnergyPoints[index].pop_back();
                 index = (index + 1) % DynamicSharedData::NUM_WEIGHTS;
                 totPlants--;
             }
         }else{
             int index = DynamicSharedData::NUM_WEIGHTS-1;
             for(int i=0;i<excess;i++){
-            	gTypedEnergyPoints[index].pop_back();
+                typedEnergyPoints[i].back()->setActiveStatus(false);
+                factory->removeResource(typedEnergyPoints[i].back());
+            	typedEnergyPoints[index].pop_back();
+                
                 index = (index - 1) % DynamicSharedData::NUM_WEIGHTS;
                 totPlants--;
             }
@@ -156,22 +171,21 @@ void DynamicWorldObserver::updatePlants(){
         if(sizes[0] < sizes[DynamicSharedData::NUM_WEIGHTS-1]){
             int index = 0;
             for(int i=0;i<lack;i++){
-                TypedEnergyPoint point(0,index); /*TO Check*/
-                gTypedEnergyPoints[index].push_back(point);
+                TypedEnergyPointPtr point = factory->addResource();
+                point->setType(i);
                 index = (index + 1) % DynamicSharedData::NUM_WEIGHTS;
                 totPlants++;
             }
         }else{
             int index = DynamicSharedData::NUM_WEIGHTS-1;
             for(int i=0;i<lack;i++){
-                TypedEnergyPoint point(0,index); /*TO Check*/
-                gTypedEnergyPoints[index].push_back(point);
+                TypedEnergyPointPtr point = factory->addResource();
+                point->setType(i);
                 index = (index - 1) % DynamicSharedData::NUM_WEIGHTS;
                 totPlants++;
             }
         }
     }
-
     if(totPlants != DynamicSharedData::NUM_PLANTS){
         std::cerr << "We've created a different amount of plants than expected: " << totPlants << " vs. " << DynamicSharedData::NUM_PLANTS << std::endl;
     }
@@ -199,19 +213,19 @@ void DynamicWorldObserver::updateAllAgentsEnergy() {
 		currentAgentWorldModel->setDeltaEnergy(currentAgentWorldModel->getDeltaEnergy() - 1);
 
 		if (currentAgentWorldModel->isActive()) {
-			Point2d posRobot(currentAgentWorldModel->_xReal,currentAgentWorldModel->_yReal);
-			for(unsigned int j = 0; j < gTypedEnergyPoints.size();j++){
-                for(unsigned int k = 0; k < gTypedEnergyPoints[j].size();k++){
-                    if (gTypedEnergyPoints[j][k].getActiveStatus() && // The energy point is active
-                        getEuclidianDistance(posRobot,gTypedEnergyPoints[j][k].getPosition()) < gEnergyPointRadius // the robot is on it
+			Point2d posRobot = currentAgentWorldModel->getPosition();
+			for(unsigned int j = 0; j < typedEnergyPoints.size();j++){
+                for(unsigned int k = 0; k < typedEnergyPoints[j].size();k++){
+                    if (typedEnergyPoints[j][k]->getActiveStatus() && // The energy point is active
+                        posRobot.distance(typedEnergyPoints[j][k]->getPosition()) < gEnergyPointRadius // the robot is on it
                         ) {
                         // update energy level
                         //std::cout << "Energy Point: " << j << " is giving energy to agent: " << currentAgentWorldModel->_agentId << std::endl;
-                        int plantType = gTypedEnergyPoints[j][k].getType();
+                        int plantType = typedEnergyPoints[j][k]->getType();
                         if(plantType < 1 // either the plant is edible for all
                            || (gWorld->getAgent(i)->isPartOfOrganism() && gWorld->getAgent(i)->getOrganism()->size() > plantType) // or the organism is larger than the plants size
                            ) {
-                            double loadingEnergy = (gTypedEnergyPoints[j][k].getType()+1) * gEnergyPointValue;
+                            double loadingEnergy = (typedEnergyPoints[j][k]->getType()+1) * gEnergyPointValue;
                             if (gWorld->getAgent(i)->isPartOfOrganism()) {
                                 Organism* organism = gWorld->getAgent(i)->getOrganism();
 
@@ -243,7 +257,7 @@ void DynamicWorldObserver::updateAllAgentsEnergy() {
                                     currentAgentWorldModel->setEnergyGained(currentAgentWorldModel->getEnergyGained() + loadingEnergy);
                                 }
                             }
-                            gTypedEnergyPoints[j][k].setActiveStatus(false);
+                            typedEnergyPoints[j][k]->setActiveStatus(false);
                         }
                     }
 				}

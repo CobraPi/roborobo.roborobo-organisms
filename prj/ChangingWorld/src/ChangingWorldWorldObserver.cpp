@@ -6,6 +6,7 @@
 #include "ChangingWorld/include/ChangingWorldAgentWorldModel.h"
 #include "BehaviorControlArchitectures/EvolutionaryControlArchitecture.h"
 #include "SDL_collide.h"
+#include "World/EnergyPoint.h"
 
 ChangingWorldWorldObserver::ChangingWorldWorldObserver(World *__world) : WorldObserver(__world) {
 	_world = __world;
@@ -76,16 +77,17 @@ void ChangingWorldWorldObserver::updateAllAgentsEnergy() {
 		}
         
 		if (currentAgentWorldModel->isActive()) {
-			Point2d posRobot(currentAgentWorldModel->_xReal,currentAgentWorldModel->_yReal);
-			//for (std::vector<EnergyPoint>::iterator it = gEnergyPoints.begin(); it != gEnergyPoints.end(); it++) {
-			for(unsigned int j =0; j < gEnergyPoints.size();j++){
-                int x1 = currentAgentWorldModel->_xReal;
-                int y1 = currentAgentWorldModel->_yReal;
+			Point2d posRobot = currentAgentWorldModel->getPosition();
+            std::vector<ResourceFactory<EnergyPoint>::ResourcePtr> energyPoints = ResourceFactory<EnergyPoint>::getInstance()->getResources();
+//			for (std::vector<EnergyPoint>::iterator it = energyPoints.begin(); it != energyPoints.end(); it++) {
+			for(unsigned int j =0; j < energyPoints.size();j++){
+                int x1 = posRobot.x;
+                int y1 = posRobot.y;
                 int r1 = gAgentWidth/2;
-                int x2 = gEnergyPoints[j].getPosition().x;
-                int y2 = gEnergyPoints[j].getPosition().y;
+                int x2 = energyPoints[j]->getPosition().x;
+                int y2 = energyPoints[j]->getPosition().y;
                 int r2 = gEnergyPointRadius;
-                if (gEnergyPoints[j].getActiveStatus() && SDL_CollideBoundingCircle(x1,y1,r1,x2,y2,r2,0)) {
+                if (energyPoints[j]->getActiveStatus() && SDL_CollideBoundingCircle(x1,y1,r1,x2,y2,r2,0)) {
 					// update energy level
 					//std::cout << "Energy Point: " << j << " is giving energy to agent: " << currentAgentWorldModel->_agentId << std::endl;
 					
@@ -120,7 +122,7 @@ void ChangingWorldWorldObserver::updateAllAgentsEnergy() {
 						}
 //                        std::cout << currentAgentWorldModel->getEnergyLevel() << " energy" << std::endl;
 					}
-                    gEnergyPoints[j].setActiveStatus(false);
+                    energyPoints[j]->setActiveStatus(false);
 				}
 			}
 		}

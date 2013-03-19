@@ -13,7 +13,7 @@
 
 #include "RoboroboMain/roborobo.h"
 
-#include "Sensor/Sensors.h"
+#include "Sensor/Sensor.h"
 #include "Sensor/DefaultSensors.h"
 
 
@@ -33,6 +33,9 @@ RobotAgentWorldModel::RobotAgentWorldModel()
 	_energyGained = 0;
 
     joinedOrganism = false;
+    
+    position = Point2d(0,0);
+    
 	/**
 	 * Adds the 'default' sensor methods implemented by this class as active
 	 * sensor methods.
@@ -45,8 +48,8 @@ RobotAgentWorldModel::RobotAgentWorldModel()
 
 RobotAgentWorldModel::~RobotAgentWorldModel()
 {
-
-
+    sensors.clear();
+    delete defaultSensors;
 }
 
 void RobotAgentWorldModel::setRobotNeighborhoodCounter( int __value )
@@ -64,15 +67,15 @@ int RobotAgentWorldModel::getRobotNeighborhoodCounter()
 	return _robotNeighborhoodCounter;
 }
 
-double RobotAgentWorldModel::getXReal()
-{
-	return _xReal;
-}
-
-double RobotAgentWorldModel::getYReal()
-{
-	return _yReal;
-}
+//double RobotAgentWorldModel::getXReal()
+//{
+//	return _xReal;
+//}
+//
+//double RobotAgentWorldModel::getYReal()
+//{
+//	return _yReal;
+//}
 
 bool RobotAgentWorldModel::getRobotLED_status()
 {
@@ -130,7 +133,7 @@ double RobotAgentWorldModel::getEnergyGained() const {
 	return this->_energyGained;
 }
 
-void RobotAgentWorldModel::addSensors(Sensors *sensorType){
+void RobotAgentWorldModel::addSensors(Sensor *sensorType){
 	sensors.push_back(sensorType);
 }
 
@@ -153,8 +156,42 @@ double RobotAgentWorldModel::getAbsoluteOrientation(){
 void RobotAgentWorldModel::initSensors(){
 	for(unsigned int i = 0; i < sensors.size(); i++){
 		std::cout << "passed sensor nr.: " << i << std::endl;
-		sensors.at(i)->init(new Point2d(getXReal(), getYReal()), getAbsoluteOrientation());
+		sensors.at(i)->init(getPosition(), getAbsoluteOrientation());
 	}
+}
+
+void RobotAgentWorldModel::updateSensors(){
+    for(unsigned int i = 0; i < sensors.size(); i++){
+		sensors[i]->update(getPosition(), getAbsoluteOrientation());
+	}
+}
+
+void RobotAgentWorldModel::resetSensors(){
+    for(unsigned int i = 0; i < sensors.size(); i++){
+		sensors[i]->reset();
+	}
+}
+
+void RobotAgentWorldModel::displaySensorInformation(){
+    for(unsigned int i = 0; i < sensors.size(); i++){
+        sensors[i]->displaySensorInformation();
+    }
+}
+
+void RobotAgentWorldModel::displaySensors(){
+    std::deque<bool> displayed = std::deque<bool>(sensors[0]->getSensorCount(), false);
+    for(unsigned int i = sensors.size()-1; i >= 1; i--){
+        sensors[i]->displaySensor(gScreen, position, _agentAbsoluteOrientation, displayed, false);
+    }
+    sensors[0]->displaySensor(gScreen, position, _agentAbsoluteOrientation, displayed, true);
+}
+
+Point2d RobotAgentWorldModel::getPosition(){
+    return position;
+}
+
+void RobotAgentWorldModel::setPosition(Point2d &pos){
+    position = pos;
 }
 
 DefaultSensors* RobotAgentWorldModel::getDefaultSensors(){

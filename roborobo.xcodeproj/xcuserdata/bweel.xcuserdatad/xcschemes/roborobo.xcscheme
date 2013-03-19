@@ -61,11 +61,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-l config/parcours.properties"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-l config/dynamic.properties"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-l config/default.properties"

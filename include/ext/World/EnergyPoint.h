@@ -13,9 +13,11 @@
 #include "RoboroboMain/common.h"
 #include "Utilities/Misc.h"
 #include "World/Resource.h"
+#include "World/ResourceFactory.h"
 
-class EnergyPoint : public Resource{
+class EnergyPoint : public Resource {
 	private :
+        friend class ResourceFactory<EnergyPoint>;
 
 		static int _nextId;
 
@@ -40,15 +42,14 @@ class EnergyPoint : public Resource{
 
 		int _iterationMax;
 
-        void initialize();
-        bool isCollision();
+        void initialize(SDL_Surface *surface);
+        bool isCollision(SDL_Surface *surface);
 
-	public :
-
-		EnergyPoint();
-		EnergyPoint(int id);
-		EnergyPoint(int id,Uint32 color);
-		~EnergyPoint();
+	public:
+        EnergyPoint(SDL_Surface *surface);
+        EnergyPoint(int id, SDL_Surface *surface);
+        EnergyPoint(int id, SDL_Surface *surface,Uint32 color);
+		virtual ~EnergyPoint();
 
 		double getRadius();
 		int getID();
@@ -80,9 +81,9 @@ class EnergyPoint : public Resource{
 		void setFixedLocationStatus( bool __value );
 		bool getFixedLocationStatus();
 
-		virtual void step();
-		virtual void display();
-		virtual void hide();
+		virtual void step(SDL_Surface *surface);
+		virtual void display(SDL_Surface *surface);
+		virtual void hide(SDL_Surface *surface);
 };
 
 #endif

@@ -47,7 +47,7 @@ void DynamicAgentObserver::step()
 			orgSize = agent->getOrganism()->size();
 			orgId = agent->getOrganism()->getId();
 		}
-		DynamicSharedData::locationLogFile << "," << _wm->_xReal << "," << _wm->_yReal << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << "," << _wm->swarmTime << "," << _wm->organismTime << std::endl;
+//		DynamicSharedData::locationLogFile << "," << _wm->_xReal << "," << _wm->_yReal << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << "," << _wm->swarmTime << "," << _wm->organismTime << std::endl;
 	}
 }
 

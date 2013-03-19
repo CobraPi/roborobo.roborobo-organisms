@@ -128,7 +128,8 @@ void SymbrionWorldObserver::updateWorld() {
         }
 		
 		//std::cerr << "x" << agents.at( shuffledIndex[i] )->getWorldModel()->_xReal << " y: " << agents.at( shuffledIndex[i] )->getWorldModel()->_yReal << std::endl;
-		_heatmap[getAgent(i)->getWorldModel()->_yReal][getAgent(i)->getWorldModel()->_xReal]++;
+        Point2d position = getAgent(i)->getWorldModel()->getPosition();
+		_heatmap[position.x][position.y]++;
 	}
 	
 	if( _world->getIterations() % 5000 == 0 )
@@ -150,10 +151,8 @@ void SymbrionWorldObserver::boardcastOrganism(int index)
 		std::vector<SymbrionRobotAgentPtr> nearEggs;
 		for( int i = 0; i < gAgentCounter; i++ )
 		{
-			double x2, y2;
-			x2 = getAgent(i)->getWorldModel()->getXReal();
-            y2 = getAgent(i)->getWorldModel()->getYReal();
-			int distance = sqrt( pow( x2 - broadcaster->getWorldModel()->getXReal(), 2 ) + pow( y2 - broadcaster->getWorldModel()->getYReal(), 2 ) );
+            Point2d position = getAgent(i)->getWorldModel()->getPosition();
+			int distance = position.distance(broadcaster->getWorldModel()->getPosition());
 			if(getAgent(i)->getState() == EGG && distance <= SymbrionSharedData::maxOrganismBoardcastRange )
 				nearEggs.push_back(getAgent( i ) );
 		}
@@ -175,46 +174,40 @@ void SymbrionWorldObserver::boardcastSeed(int index)
 		std::vector<RobotAgentPtr> nearRobots;
 		for(int i = 0; i < _world->getNbOfAgent(); i++)
 		{
-			double x2, y2;
-            x2 = getAgent(i)->getWorldModel()->getXReal();
-            y2 = getAgent(i)->getWorldModel()->getYReal();
-			int distance = sqrt( pow( x2 - broadcaster->getWorldModel()->getXReal(), 2 ) + pow( y2 - broadcaster->getWorldModel()->getYReal(), 2 ) );
-			if(getAgent(i)->getState() == FREERIDER && distance <= SymbrionSharedData::maxSeedBoardcastRange && !getAgent(i)->isPartOfOrganism()){
+            Point2d position = getAgent(i)->getWorldModel()->getPosition();
+			int distance = position.distance(broadcaster->getWorldModel()->getPosition());			if(getAgent(i)->getState() == FREERIDER && distance <= SymbrionSharedData::maxSeedBoardcastRange && !getAgent(i)->isPartOfOrganism()){
 				nearRobots.push_back(getAgent(i));
             }
 		}
 		for(unsigned int i =0 ; i < nearRobots.size(); i++ )
 		{
-			SymbrionSharedData::gEventLogFile << _world->getIterations() << "," << broadcaster->getGenome()->getId() << ",4," << broadcaster->getWorldModel()->getXReal() << "," << broadcaster->getWorldModel()->getYReal() << "," << broadcaster->getWorldModel()->getStateLifetime() << ",boardcast recruitment\n";
+			SymbrionSharedData::gEventLogFile << _world->getIterations() << "," << broadcaster->getGenome()->getId() << ",4," << broadcaster->getWorldModel()->getPosition() << "," << broadcaster->getWorldModel()->getStateLifetime() << ",boardcast recruitment\n";
 			RobotAgentPtr other = nearRobots.at(i);
             other->unregisterAgent();
 
             assert(getAgent(other->getWorldModel()->_agentId)->getState() != SEED);
             assert(broadcaster->getOrganism() != NULL);
             
-			int x = 0;
-			int y = 0;
-			double x_old = other->getWorldModel()->_xReal;
-			double y_old = other->getWorldModel()->_yReal;
+            Point2d oldPosition = other->getWorldModel()->getPosition();
+            Point2d broadcasterPosition = broadcaster->getWorldModel()->getPosition();
 			
 			Coord2d coord = broadcaster->getGenome()->current();
             
             //            std::cout << "relative location: " << coord._x << ", " << coord._y << std::endl;
 			
-            //x = this->_x + coords.at( index )._x * gAgentWidth;
-            //y = this->_y + coords.at( index )._y * gAgentHeight;
-            x = broadcaster->getWorldModel()->getXReal() + coord._x * gAgentWidth;
-            y = broadcaster->getWorldModel()->getYReal() + coord._y * gAgentHeight;
+            Point2d newPosition;
+            newPosition.x = broadcasterPosition.x + coord._x * gAgentWidth;
+            newPosition.y = broadcasterPosition.y + coord._y * gAgentHeight;
             
             //std::cout << this->getWorldModel()->_agentId << " at location: " << this->getWorldModel()->_xReal << ", " << this->getWorldModel()->_yReal << " found another robot to connect " << other->getWorldModel()->_agentId << " setting coordinates from: " << x_old << ", " << y_old << " to: " << x << ", " << y;
             
             assert(broadcaster->getOrganism() != NULL);
-			other->setCoord( x, y );
-            other->setCoordReal(x, y);
+			other->setCoord((int)newPosition.x+0.5, (int)newPosition.y+0.5);
+            other->setCoordReal(newPosition.x, newPosition.y);
 			if(other->isCollision())
 			{
-				other->setCoord( x_old, y_old );
-                other->setCoordReal(x_old, y_old);
+				other->setCoord((int)oldPosition.x+0.5, (int)oldPosition.y+0.5 );
+                other->setCoordReal(oldPosition.x, oldPosition.y);
                 
                 other->registerAgent();
 				continue;
@@ -233,7 +226,7 @@ void SymbrionWorldObserver::boardcastSeed(int index)
                 gLogFile << _world->getIterations() << "," << broadcaster->getGenome()->getId() << broadcaster->getWorldModel()->getStateLifetime() << std::endl;
 				//broadcaster->dockESN();
 				
-				SymbrionSharedData::gEventLogFile << _world->getIterations() << "," <<  broadcaster->getGenome()->getId() << ",5," << broadcaster->getWorldModel()->getXReal() << "," << broadcaster->getWorldModel()->getYReal() << "," << broadcaster->getWorldModel()->getStateLifetime() << ",toOrganism\n";
+				SymbrionSharedData::gEventLogFile << _world->getIterations() << "," <<  broadcaster->getGenome()->getId() << ",5," << broadcaster->getWorldModel()->getPosition() << "," << broadcaster->getWorldModel()->getStateLifetime() << ",toOrganism\n";
                 
 				broadcaster->getWorldModel()->setStateLifetime( 0 );
                 broadcaster->setState(ADULT);

@@ -10,7 +10,7 @@ Puck belongs to some distribution, which assigns coordinates and colors.
 */
 
 
-class Puck : public Resource{
+class Puck : public Resource {
     private :
         static int _nextId; int _id;
         Sint16 _xCenterPixel; Sint16 _yCenterPixel;
@@ -54,11 +54,11 @@ class Puck : public Resource{
         }
         
 
-        virtual void display();
+        virtual void display(SDL_Surface *surface);
 
-        virtual void hide();
+        virtual void hide(SDL_Surface *surface);
 
-        virtual void step();
+        virtual void step(SDL_Surface *surface);
 
         static const Uint32 COLOR_WHITE = 0xFFFFFF;
         

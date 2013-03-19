@@ -8,13 +8,11 @@
 #ifndef DEFAULTSENSORS_H_
 #define DEFAULTSENSORS_H_
 
-//#include "World/World.h"
-
 #include "RoboroboMain/roborobo.h"
 
-#include "Sensor/Sensors.h"
+#include "Sensor/Sensor.h"
 
-class DefaultSensors : public Sensors{
+class DefaultSensors : public Sensor {
 private:
 	// description and values of sensors
 	/// id sensor(R),sensor_origin_norm,sensor_origin_angle,
@@ -32,7 +30,7 @@ private:
 public:
 	DefaultSensors();
 
-	~DefaultSensors();
+	virtual ~DefaultSensors();
 
 	/**
 	 * Initializes the sensors. Required.
@@ -45,13 +43,13 @@ public:
 	 *
 	 * @param _wm
 	 */
-	void init(Point2d *position, double orientation);
+	void init(Point2d position, double orientation);
 
 
 	/**
 	 * Update your sensor values. Required.
 	 */
-	void update(Point2d *position, double orientation);
+	void update(Point2d position, double orientation);
 
 
 	/**
@@ -71,7 +69,7 @@ stackoverflow.com/questions/.../ds class is not necessary per sè. (however, it
 	 * @param screen
 	 * 		The screen to paint the sensors on
 	 */
-	void displaySensors(SDL_Surface *screen, Point2d *position, double orientation);
+    void displaySensor(SDL_Surface *screen, Point2d position, double orientation, std::deque<bool> &displayed, bool force);
 
 
 	/**
@@ -154,12 +152,9 @@ RobotAgentWorldModel::~RobotAgentWorldModelor ray (if any)
 
 	double** getSensors();
 
+	std::vector<RobotAgentPtr> getNearRobots(RobotAgent *agent);
 
-	void getNearRobots(std::vector<RobotAgentPtr> *agents, RobotAgent *agent);
-
-	int getSensorCount(){
-		return _sensorCount;
-	}
+	int getSensorCount();
 };
 
 

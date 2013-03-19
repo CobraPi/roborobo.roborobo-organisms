@@ -6,6 +6,7 @@
 
 #include "Observers/WorldObserver.h"
 #include "Organism.h"
+#include "World/TypedEnergyPoint.h"
 
 class World;
 
@@ -21,6 +22,9 @@ private:
     
     void initializePlants();
     void updatePlants();
+    
+    std::vector<std::vector<ResourceFactory<TypedEnergyPoint>::ResourcePtr > > typedEnergyPoints;
+    
 public:
     DynamicWorldObserver(World *__world);
     virtual ~DynamicWorldObserver();

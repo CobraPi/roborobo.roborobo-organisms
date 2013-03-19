@@ -143,6 +143,7 @@ float EnergyPerceptronControlArchitecture::getInitialEnergy()
 
 void EnergyPerceptronControlArchitecture::searchClosestEnergyPoint(Point2d posRobot)
 {
+    /*
 	std::vector<EnergyPoint>::iterator closestPoint = gEnergyPoints.begin();
 	float shortestDistance = getEuclidianDistance (posRobot,closestPoint->getPosition());
 
@@ -166,6 +167,7 @@ void EnergyPerceptronControlArchitecture::searchClosestEnergyPoint(Point2d posRo
 	{
 		_angleToClosestEnergyPoint += 2.0*M_PI;
 	}
+    */
 }
 
 

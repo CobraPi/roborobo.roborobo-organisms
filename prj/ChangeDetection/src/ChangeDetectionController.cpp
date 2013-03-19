@@ -38,7 +38,7 @@ void ChangeDetectionController::reset() {
 	
 	ChangeDetectionAgentWorldModel* worldModel = dynamic_cast<ChangeDetectionAgentWorldModel*> (_wm);
 	worldModel->penalty = 0;
-    worldModel->xStart = worldModel->_xReal;
+    worldModel->xStart = worldModel->getPosition().x;
 }
 
 void ChangeDetectionController::step(double &left, double &right) {
@@ -154,7 +154,7 @@ void ChangeDetectionController::createOrganism(double &left, double &right, int 
 		return;
 	}
 
-	Point2d posRobot(worldModel->_xReal, worldModel->_yReal);
+	Point2d posRobot(worldModel->getPosition().x, worldModel->getPosition().y);
 
 //	double closestDistance = getMaximumDistance();
 	bool found = false;
@@ -246,7 +246,7 @@ vector<double> ChangeDetectionController::getSensorValues() {
 	}
 	
 	sensors.push_back(0.0); // always move right
-    sensors.push_back((gEnvironmentImage->w - worldModel->_xReal) / gEnvironmentImage->w); // distance to goal
+    sensors.push_back((gEnvironmentImage->w - worldModel->getPosition().x) / gEnvironmentImage->w); // distance to goal
 	
 	return sensors;
 }

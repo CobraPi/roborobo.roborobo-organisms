@@ -3,16 +3,21 @@
 
 #include "World/World.h"
 
+
 DynamicAgentWorldModel::DynamicAgentWorldModel() {
 	_active = true;
 	swarmTime = 0;
 	organismTime = 0;
 	penalty = 0;
-    xStart = -1;
-    yStart = -1;
+    start.x = -1;
+    start.y = -1;
+    
+    typedEnergySensor = new ResourceSensor<TypedEnergyPoint>();
+    addSensors(typedEnergySensor);
 }
 
 DynamicAgentWorldModel::~DynamicAgentWorldModel() {
+    delete typedEnergySensor;
 }
 
 void DynamicAgentWorldModel::setActive(bool _active) {
@@ -37,4 +42,8 @@ void DynamicAgentWorldModel::setDistanceToClosestEnergyPoint(double __value) {
 
 double DynamicAgentWorldModel::getDistanceToClosestEnergyPoint() {
 	return _distanceToClosestEnergyPoint;
+}
+
+ResourceSensor<TypedEnergyPoint> *DynamicAgentWorldModel::getTypedEnergySensor(){
+    return typedEnergySensor;
 }
