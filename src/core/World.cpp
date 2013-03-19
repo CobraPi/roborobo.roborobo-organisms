@@ -12,8 +12,8 @@
 #include "Organism.h"
 
 #include "Config/GlobalConfigurationLoader.h"
-#include "ResourceFactory.h"
-#include "EnergyPoint.h"
+#include "World/ResourceFactory.h"
+#include "World/EnergyPoint.h"
 
 World::World() {
 	_iterations = 0;
