@@ -18,6 +18,7 @@
 #include "RoboroboMain/roborobo.h"
 #include "Utilities/SDL_gfxPrimitives.h"
 #include "Utilities/SDL_gfxPrimitivesExtra.h"
+#include "Utilities/SDL_gfxRoborobo.h"
 #include "World/ResourceUpdater.h"
 
 template<class Resource>
