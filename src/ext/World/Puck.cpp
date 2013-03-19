@@ -36,7 +36,7 @@ void Puck::step(std::vector< std::vector<int> > *gPuckMap) {
 }
 
 
-void Puck::step(){
+void Puck::step(SDL_Surface *surface){
 
 }
 
@@ -71,11 +71,11 @@ void Puck::fillEnvironment(std::vector< std::vector<int> > *gPuckMap, Uint32 c, 
     }
 }
 
-void Puck::display(){
+void Puck::display(SDL_Surface *surface){
 
 }
 
-void Puck::hide(){
+void Puck::hide(SDL_Surface *surface){
 
 }
 

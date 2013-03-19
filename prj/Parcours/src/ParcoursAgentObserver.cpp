@@ -39,6 +39,6 @@ void ParcoursAgentObserver::step()
 			orgSize = agent->getOrganism()->size();
 			orgId = agent->getOrganism()->getId();
 		}
-		ParcoursSharedData::locationLogFile << "," << _wm->_xReal << "," << _wm->_yReal << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << "," << _wm->swarmTime << "," << _wm->organismTime << std::endl;
+		ParcoursSharedData::locationLogFile << "," << _wm->getPosition().x << "," << _wm->getPosition().y << "," << agent->isPartOfOrganism() << "," << orgSize << "," << orgId << "," << _wm->swarmTime << "," << _wm->organismTime << std::endl;
 	}
 }

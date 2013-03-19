@@ -5,7 +5,7 @@
  *      Author: Job Bakker
  */
 
-#include "Sensors/PuckSensors.h"
+#include "Sensor/PuckSensors.h"
 
 
 PuckSensors::PuckSensors(int id, double originDistance, double originAngle, double targetDistance, double targetAngle, double maxSensorDistance) {
@@ -23,7 +23,7 @@ PuckSensors::~PuckSensors(){
 }
 
 
-void PuckSensors::init(Point2d *position, double orientation){
+void PuckSensors::init(Point2d position, double orientation){
 
 }
 
@@ -32,13 +32,7 @@ void PuckSensors::displaySensorInformation(){
 
 }
 
-
-void PuckSensors::getNearRobots(std::vector<RobotAgentPtr> *agents, RobotAgent *agent){
-
-}
-
-
-void PuckSensors::update(Point2d *position, double orientation){
+void PuckSensors::update(Point2d position, double orientation){
 	double orientationAngle = orientation * M_PI / 180;
 
 	double sinOrigin, cosOrigin, sinTarget, cosTarget;
@@ -47,10 +41,10 @@ void PuckSensors::update(Point2d *position, double orientation){
     sinTarget = std::sin(_targetAngle + orientationAngle);
     cosTarget = std::cos(_targetAngle + orientationAngle);
     
-	_sensorRay.x1 = position->x + _originDistance * cosOrigin;
-	_sensorRay.y1 = position->y + _originDistance * sinOrigin;
-	_sensorRay.x2 = position->x + _targetDistance * cosTarget;
-	_sensorRay.y2 = position->y + _targetDistance * sinTarget;
+	_sensorRay.x1 = position.x + _originDistance * cosOrigin;
+	_sensorRay.y1 = position.y + _originDistance * sinOrigin;
+	_sensorRay.x2 = position.x + _targetDistance * cosTarget;
+	_sensorRay.y2 = position.y + _targetDistance * sinTarget;
 }
 
 
@@ -59,7 +53,7 @@ void PuckSensors::reset(){
 }
 
 
-void PuckSensors::displaySensors(SDL_Surface* surface, Point2d *position, double orientation) {
+void PuckSensors::displaySensor(SDL_Surface *surface, Point2d position, double orientation, std::deque<bool> &displayed, bool force) {
     int ranges[50]; int pixels[50];    // (R<<16)+(G<<8)+B; R=objects, B=agents, G=pucks (if R==0xFF)
 
     int count = castSensorRay(surface, _sensorRay, ranges, pixels);
@@ -73,6 +67,8 @@ void PuckSensors::displaySensors(SDL_Surface* surface, Point2d *position, double
     }
     _obstacleRange = ranges[count-1];
     _obstacleId = pixels[count-1];
+    
+    // TODO: Puck sensors are never shown?
 }
 
 

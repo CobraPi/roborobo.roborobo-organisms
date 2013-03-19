@@ -13,7 +13,7 @@
 #include "Utilities/Misc.h"
 #include "Utils/Rand.h"
 
-#include "Sensors/PuckSensors.h"
+#include "Sensor/PuckSensors.h"
 
 #include "MONEEWorldObserver.h"
 

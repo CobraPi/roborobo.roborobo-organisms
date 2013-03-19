@@ -11,7 +11,7 @@
 #define MISC_H
 
 #include <vector> 
-#include <math.h> 
+#include <cmath> 
 
 #include <string>
 #include <sstream>
@@ -32,14 +32,53 @@
 class Point2d
 {
 	public:
+    double x;
+    double y;
+    
 		Point2d()
 		{y=0;x=0;};
 		Point2d(double inX, double inY){
 			x = inX;
 			y = inY;
 		};
-		double x;
-		double y;
+    
+    Point2d(const Point2d &other){
+        x = other.x;
+        y = other.y;
+    }
+    
+    Point2d& operator =(const Point2d& v)
+    {
+        x = v.x;
+        y = v.y;
+        return (*this);
+    }
+
+    inline double distanceSquared(Point2d p){
+        double xdiff = x - p.x;
+        double ydiff = y - p.y;
+        double xsquare = xdiff * xdiff;
+        double ysquare = ydiff * ydiff;
+        
+        return xsquare + ysquare;
+    }
+    
+    inline double distance(Point2d p){
+        return std::sqrt(distanceSquared(p));
+    }
+    
+    inline double distanceX(Point2d p){
+        return x - p.x;
+    }
+
+    inline double distanceY(Point2d p){
+        return y - p.y;
+    }
+    
+    friend std::ostream& operator<< (std::ostream &stream, Point2d point){
+        stream << point.x << ", " << point.y;
+        return stream;
+    }
 };
 
 

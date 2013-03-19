@@ -43,9 +43,9 @@ void DynamicController::reset() {
 	desiredAngle = -270;
 
 	DynamicAgentWorldModel* worldModel = dynamic_cast<DynamicAgentWorldModel*> (_wm);
+    
 	worldModel->penalty = 0;
-    worldModel->xStart = worldModel->_xReal;
-    worldModel->yStart = worldModel->_yReal;
+    worldModel->start = worldModel->getPosition();
     
 	worldModel->setEnergyLevel(fmin(worldModel->getEnergyLevel()+DynamicSharedData::START_ENERGY,DynamicSharedData::MAX_ENERGY));
 	worldModel->setEnergyGained(0);
@@ -188,7 +188,7 @@ void DynamicController::createOrganism(double &left, double &right, int desired_
 		return;
 	}
 
-	Point2d posRobot(worldModel->_xReal, worldModel->_yReal);
+	Point2d posRobot = worldModel->getPosition();
 
 	double closestDistance = getMaximumDistance();
 	bool found = false;
@@ -201,7 +201,7 @@ void DynamicController::createOrganism(double &left, double &right, int desired_
 	vector<RobotAgentPtr>::iterator it;
 	for (it = close.begin(); it != close.end(); it++) {
 		if ((*it)->getConnectToOthers() == Agent::POSITIVE) {
-			Point2d closeRobot((*it)->getWorldModel()->_xReal, (*it)->getWorldModel()->_yReal);
+			Point2d closeRobot = (*it)->getWorldModel()->getPosition();
 			double distance = getEuclidianDistance(posRobot, closeRobot);
 			if (distance < closestDistance) {
 				found = true;
@@ -281,8 +281,8 @@ vector<double> DynamicController::getSensorValues() {
 	}
     
     for(int i=1;i<4;i++){
-		sensors.push_back(_wm->getDefaultSensors()->getEnergyDistanceValue(i) / _wm->getDefaultSensors()->getSensorMaximumDistanceValue(i));
-    	sensors.push_back(_wm->getDefaultSensors()->getEnergyLevelValue(i) / DynamicSharedData::NUM_WEIGHTS);
+		sensors.push_back(worldModel->getTypedEnergySensor()->getSensorValue(i) / worldModel->getTypedEnergySensor()->getSensorMaximumDistanceValue(i));
+    	sensors.push_back(worldModel->getTypedEnergySensor()->getSensorTypeValue(i) / DynamicSharedData::NUM_WEIGHTS);
     }
 
     // Organism Size

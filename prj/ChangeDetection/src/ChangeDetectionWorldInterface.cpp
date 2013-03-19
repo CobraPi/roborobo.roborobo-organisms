@@ -43,8 +43,9 @@ void ChangeDetectionWorldInterface::rePlaceRobot(RobotAgentPtr agent) {
 		int y = (int) 20 + (ranf() * (double) (gSpawnHeight));
 		agent->setCoordReal(x, y);
 		agent->setCoord(x, y);
-		agent->xReal_old = x;
-		agent->yReal_old = y;
+        
+        Point2d pos(x,y);
+		agent->oldPosition = pos;
 	}while (agent->isCollision());
 	agent->registerAgent();
 }

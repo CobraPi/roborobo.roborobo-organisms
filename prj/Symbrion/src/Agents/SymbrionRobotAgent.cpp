@@ -95,7 +95,7 @@ void SymbrionRobotAgent::toSeed()
 	this->getOrganism()->addRobot(shared_from_this());
 	Organism::add(this->getOrganism());
 	
-	SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",6," << this->getWorldModel()->_xReal << "," << this->getWorldModel()->_yReal << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",toSeed\n";
+	SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",6," << this->getWorldModel()->getPosition() << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",toSeed\n";
     
     ((SymbrionAgentWorldModel*)this->getWorldModel())->setStateLifetime(0);
     
@@ -120,7 +120,7 @@ void SymbrionRobotAgent::toEgg()
     
 	SymbrionSharedData::gTravelLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << "," << this->getWorldModel()->getDistanceTraveled() << "\n";
 	this->getWorldModel()->setDistanceTraveled(0);
-	SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",2," << this->getWorldModel()->_xReal << "," << this->getWorldModel()->_yReal << "," << this->getOrganism()->getAge() << ",toEgg\n";
+	SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",2," << this->getWorldModel()->getPosition() << "," << this->getOrganism()->getAge() << ",toEgg\n";
     
     ((SymbrionAgentWorldModel*)this->getWorldModel())->setStateLifetime(0);
     if(this->getOrganism() != NULL)
@@ -147,8 +147,8 @@ void SymbrionRobotAgent::abortion(){
     
     SymbrionSharedData::nrAbortions++;
     
-    SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",1," << this->getWorldModel()->_xReal << "," << this->getWorldModel()->_yReal << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",abortion\n";
-    SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",2," << this->getWorldModel()->_xReal << "," << this->getWorldModel()->_yReal << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",toEgg\n";
+    SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",1," << this->getWorldModel()->getPosition() << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",abortion\n";
+    SymbrionSharedData::gEventLogFile << this->getWorldModel()->_world->getIterations() << "," << this->_genome->getId() << ",2," << this->getWorldModel()->getPosition() << "," << ((SymbrionAgentWorldModel*)this->getWorldModel())->getStateLifetime() << ",toEgg\n";
     
     ((SymbrionAgentWorldModel*)this->getWorldModel())->setStateLifetime(0);
 }

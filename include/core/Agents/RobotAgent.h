@@ -132,8 +132,9 @@ public:
 	bool isPartOfOrganism();
 	bool isPartOfSameOrganism(RobotAgentPtr other);
 
-	double xReal_old;
-	double yReal_old;
+//	double xReal_old;
+//	double yReal_old;
+    Point2d oldPosition;
 	double _lastAgentAbsoluteOrientation;
 };
 

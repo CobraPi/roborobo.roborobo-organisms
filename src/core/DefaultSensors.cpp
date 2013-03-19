@@ -1,4 +1,5 @@
 #include "Sensor/DefaultSensors.h"
+#include "World/EnergyPoint.h"
 
 #include "Utilities/SDL_gfxPrimitivesExtra.h"
 
@@ -23,32 +24,32 @@ double** DefaultSensors::getSensors(){
 	return (double**)_sensors;
 }
 
-void DefaultSensors::init(Point2d *position, double orientation){
+void DefaultSensors::init(Point2d position, double orientation){
 	_sensorCount = 0;
 
 	//count sensors
 	for (int x = 0; x != gAgentWidth; x++){ // image is analysed a first time to count the number of sensors (faster than dynamically re-allocating array size for every new sensor)
 		for (int y = 0; y != gAgentHeight; y++) {
 			Uint32 pixel = getPixel32(gAgentSpecsImage, x, y);
-			if (pixel != SDL_MapRGB(gAgentSpecsImage->format, 0xFF, 0xFF, 0xFF))
+			if (pixel != SDL_MapRGB(gAgentSpecsImage->format, 0xFF, 0xFF, 0xFF)) {
 				_sensorCount++;
-			}
+            }
+        }
+    }
+	_sensors = new double[_sensorCount][7]; // see header for details.
+	_ditchSensor = new double[_sensorCount];
+	_energySensor = new double[_sensorCount][2];
 
-			_sensors = new double[_sensorCount][7]; // see header for details.
-			_ditchSensor = new double[_sensorCount];
-			_energySensor = new double[_sensorCount][2];
+	for (int i = 0; i < _sensorCount; i++) {
+		_sensors[i][0] = -1;
+		// 1 - 4 set below
+		_sensors[i][5] = -1;
+		_sensors[i][6] = -1;
 
-			for (int i = 0; i < _sensorCount; i++) {
-				_sensors[i][0] = -1;
-				// 1 - 4 set below
-				_sensors[i][5] = -1;
-				_sensors[i][6] = -1;
-
-				_ditchSensor[i] = -1;
-		        _energySensor[i][0] = -1;
-		        _energySensor[i][1] = -1;
-			}
-	}
+		_ditchSensor[i] = -1;
+        _energySensor[i][0] = -1;
+        _energySensor[i][1] = -1;
+    }
 	//int sensorIt = 0;
 
 	//register sensors
@@ -101,14 +102,14 @@ void DefaultSensors::init(Point2d *position, double orientation){
 }
 
 
-void DefaultSensors::update(Point2d *position, double orientation){
+void DefaultSensors::update(Point2d position, double orientation){
 	// update sensors
 	for (int i = 0; i < _sensorCount; i++) {
 		// Warning: the following is repeated in the show method because coordinates are not stored, but are needed to display the sensor rays.
-		double x1 = (position->x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
-		double y1 = (position->y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
-		double x2 = (position->x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
-		double y2 = (position->y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
+		double x1 = (position.x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
+		double y1 = (position.y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
+		double x2 = (position.x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
+		double y2 = (position.y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
 
 		// cast sensor ray.
 		_sensors[i][5] = castSensorRay(gEnvironmentImage, x1, y1, &x2, &y2, getSensorMaximumDistanceValue(i)); // x2 and y2 are overriden with collision coordinate if ray hits object. -- not used here.
@@ -119,15 +120,17 @@ void DefaultSensors::update(Point2d *position, double orientation){
 
 		if(gEnergyMode) {
 			// Cast another sensor on the energy map to detect energy points
-			double xx1 = (position->x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
-			double yy1 = (position->y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
-			double xx2 = (position->x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
-			double yy2 = (position->y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
-			_energySensor[i][0] = castSensorRay(gEnergyImage, xx1, yy1, &xx2, &yy2, getSensorMaximumDistanceValue(i));
+            ResourceFactory<EnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<EnergyPoint>::getInstance();
+
+            
+			double xx1 = (position.x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
+			double yy1 = (position.y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
+			double xx2 = (position.x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
+			double yy2 = (position.y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
+			_energySensor[i][0] = factory->castRay(xx1, yy1, &xx2, &yy2, getSensorMaximumDistanceValue(i));
 
             Uint8 r, g, b;
-            Uint32 pixel = getPixel32(gEnergyImage, xx2, yy2);
-            SDL_GetRGB(pixel, gEnergyImage->format, &r, &g, &b);
+            factory->getRGB(xx2, yy2, &r, &g, &b);
             if(r != 0xff){
                 _energySensor[i][1] = r; // R=level of energy
             }else{
@@ -139,7 +142,7 @@ void DefaultSensors::update(Point2d *position, double orientation){
 
 
 	Uint8 r, g, b;
-	Uint32 pixel = getPixel32(gZoneImage, position->x, position->y);
+	Uint32 pixel = getPixel32(gZoneImage, position.x, position.y);
 	SDL_GetRGB(pixel, gZoneImage->format, &r, &g, &b);
 	_floorSensor = r;
 }
@@ -154,27 +157,30 @@ void DefaultSensors::reset(){
 }
 
 
-void DefaultSensors::displaySensors(SDL_Surface *screen, Point2d *position, double orientation){
+void DefaultSensors::displaySensor(SDL_Surface *screen, Point2d position, double orientation, std::deque<bool> &displayed, bool force){
 	// * show sensors
-
 	for (int i = 0; i < _sensorCount; i++) {
 		// Warning: the following is a repetition of code already in the move method (sensor ray casting) in order to display it (coordinates are not stored)
-		double x1 = (position->x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
-		double y1 = (position->y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
-		double x2 = (position->x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
-		double y2 = (position->y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
+		double x1 = (position.x + _sensors[i][1] * cos(_sensors[i][2] + orientation * M_PI / 180));
+		double y1 = (position.y + _sensors[i][1] * sin(_sensors[i][2] + orientation * M_PI / 180));
+		double x2 = (position.x + _sensors[i][3] * cos(_sensors[i][4] + orientation * M_PI / 180));
+		double y2 = (position.y + _sensors[i][3] * sin(_sensors[i][4] + orientation * M_PI / 180));
 
 		// sensor ray casting is also performed in the move method -- this time we dont store data (already done). -- this one is only used to *display* the ray.
 		/*_sensors[i][5] = */
 		castSensorRay(gEnvironmentImage, x1, y1, &x2, &y2, getSensorMaximumDistanceValue(i)); // x2 and y2 are overriden with collision coordinate if ray hits object.
 
 		// display on screen
-		if (_sensors[i][5] < getSensorMaximumDistanceValue(i) - 1) //gSensorRange-1 )
+		if (!displayed[i] && _sensors[i][5] < getSensorMaximumDistanceValue(i) - 1) {//gSensorRange-1 )
+            displayed[i] = true;
 			traceRayRGBA(screen, int(x1 + 0.5) - gCamera.x, int(y1 + 0.5) - gCamera.y, int(x2 + 0.5) - gCamera.x, int(y2 + 0.5) - gCamera.y, 255, 0, 0, 255);
-		else if (gEnergyMode && _energySensor[i][0] < getSensorMaximumDistanceValue(i) - 1)
+		} else if (gEnergyMode && !displayed[i] && _energySensor[i][0] < getSensorMaximumDistanceValue(i) - 1) {
+            displayed[i] = true;
 			traceRayRGBA(screen, int(x1 + 0.5) - gCamera.x, int(y1 + 0.5) - gCamera.y, int(x2 + 0.5) - gCamera.x, int(y2 + 0.5) - gCamera.y, 0, 255, 0, 255);
-		else
+        } else if (!displayed[i] && force) {
+            displayed[i] = true;
 			traceRayRGBA(screen, int(x1 + 0.5) - gCamera.x, int(y1 + 0.5) - gCamera.y, int(x2 + 0.5) - gCamera.x, int(y2 + 0.5) - gCamera.y, 0, 0, 255, 255);
+        }
 	}
 }
 
@@ -225,7 +231,20 @@ void DefaultSensors::displaySensorInformation(){
 	}
 }
 
+std::vector<RobotAgentPtr> DefaultSensors::getNearRobots(RobotAgent *agent){
+	std::vector<RobotAgentPtr> agents;
+	for(unsigned int i = 0; i < _sensorCount; i++){
+        if(_sensors[i][6] >= 1000 && _sensors[i][6] <= 2000){
+            RobotAgentPtr other = gWorld->getAgent(_sensors[i][6]-1000);
+            if(!gUseOrganisms || !agent->isPartOfSameOrganism(other)){
+				agents.push_back(gWorld->getAgent(_sensors[i][6]-1000));
+			}
+        }
+	}
 
-void DefaultSensors::getNearRobots(std::vector<RobotAgentPtr> *agents, RobotAgent *agent){
+	return agents;
+}
 
+int DefaultSensors::getSensorCount(){
+	return _sensorCount;
 }

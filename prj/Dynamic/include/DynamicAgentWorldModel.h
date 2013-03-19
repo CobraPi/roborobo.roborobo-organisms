@@ -8,6 +8,8 @@
 #include "WorldModels/RobotAgentWorldModel.h"
 
 #include "Organism.h"
+#include "World/TypedEnergyPoint.h"
+#include "Sensor/ResourceSensor.h"
 
 class World;
 class Organism;
@@ -18,13 +20,13 @@ private:
 
 	double _angleToClosestEnergyPoint;
 	double _distanceToClosestEnergyPoint;
-
+    
+    ResourceSensor<TypedEnergyPoint> *typedEnergySensor;
 public:
 	unsigned int swarmTime;
 	unsigned int organismTime;
 	int penalty;
-	double xStart;
-    double yStart;
+    Point2d start;
 
 	// refer to super class to check what data / methods are available.
 
@@ -39,6 +41,8 @@ public:
 
 	void setDistanceToClosestEnergyPoint(double __value);
 	double getDistanceToClosestEnergyPoint();
+    
+    ResourceSensor<TypedEnergyPoint> *getTypedEnergySensor();
 };
 
 

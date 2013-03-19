@@ -42,8 +42,8 @@ void ChangingWorldController::reset() {
 	worldModel->setEnergyGained(0);
 	worldModel->setActive(true);
 	
-    worldModel->setXStart(worldModel->_xReal);
-    worldModel->setYStart(worldModel->_yReal);
+    worldModel->setXStart(worldModel->getPosition().x);
+    worldModel->setYStart(worldModel->getPosition().y);
 }
 
 void ChangingWorldController::step(double &left, double &right) {
@@ -200,7 +200,7 @@ void ChangingWorldController::createOrganism(double &left, double &right, int de
 		return;
 	}
 
-	Point2d posRobot(worldModel->_xReal, worldModel->_yReal);
+	Point2d posRobot = worldModel->getPosition();
 
 //	double closestDistance = getMaximumDistance();
 	bool found = false;

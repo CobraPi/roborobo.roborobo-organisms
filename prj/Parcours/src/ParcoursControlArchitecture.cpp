@@ -46,7 +46,7 @@ ControllerPtr ParcoursControlArchitecture::createRandomGenome() {
 double ParcoursControlArchitecture::calculateStepFitness() {
 	ParcoursAgentWorldModel* worldModel = dynamic_cast<ParcoursAgentWorldModel*> (_wm);
 
-	double distance = worldModel->_xReal - worldModel->xStart;
+	double distance = worldModel->getPosition().x - worldModel->xStart;
 	double fitness = distance;
 
 	return fitness;

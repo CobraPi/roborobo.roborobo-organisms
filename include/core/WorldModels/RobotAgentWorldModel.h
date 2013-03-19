@@ -16,8 +16,7 @@
 
 #include "WorldModels/WorldModel.h"
 
-#include "Sensor/Sensors.h"
-
+#include "Sensor/Sensor.h"
 #include "Sensor/DefaultSensors.h"
 
 class World;
@@ -41,16 +40,20 @@ class RobotAgentWorldModel : public WorldModel
 	    double _energyLevel;
 	    double _deltaEnergy;
 	    double _energyGained;
+    
+        Point2d position; // The robots position, replaces xReal and yReal
+    //		double _xReal;
+    //		double _yReal;
+    
+        /**
+         * Keeps the current used sensor types. These active sensor types are the
+         * sensors that are currently actively used by the program.
+         */
+        std::vector<Sensor*> sensors;
+        
+        DefaultSensors *defaultSensors;
 
 	public:
-		/**
-		 * Keeps the current used sensor types. These active sensor types are the
-		 * sensors that are currently actively used by the program.
-		 */
-		std::vector<Sensors*> sensors;
-
-		DefaultSensors *defaultSensors;
-
 		/**
 		 * Add a type of sensor to the robot. After you added the sensor to the
 		 * robot, it will be called accordingly to the abstract class Sensors.
@@ -58,11 +61,17 @@ class RobotAgentWorldModel : public WorldModel
 		 * @param sensors
 		 * 		The type of sensor to add
 		 */
-		void addSensors(Sensors *sensorType);
-
+		void addSensors(Sensor *sensorType);
 		void initSensors();
+    void updateSensors();
+    void resetSensors();
+    void displaySensorInformation();
+    void displaySensors();
+    
+    Point2d getPosition();
+    void setPosition(Point2d &pos);
 
-		DefaultSensors* getDefaultSensors();
+		DefaultSensors *getDefaultSensors();
 	
 		World *_world;
 	
@@ -71,8 +80,6 @@ class RobotAgentWorldModel : public WorldModel
 		bool _isAlive;  // robot behavior is executed *only* if robot is alived. (default is: alive)
 		
 		// absolute localization value in the simulated world -- GPS-like (ie. internal data for displaying, not robot-centered)
-		double _xReal;
-		double _yReal;
 		double _agentAbsoluteOrientation;
 		double _agentAbsoluteLinearSpeed;
 		
@@ -123,8 +130,8 @@ class RobotAgentWorldModel : public WorldModel
 		void incRobotNeighborhoodCounter( ); // increment
 		int getRobotNeighborhoodCounter();
 		
-		double getXReal(); // real absolute X coordinate 
-		double getYReal(); // real absolute Y coordinate
+//		double getXReal(); // real absolute X coordinate 
+//		double getYReal(); // real absolute Y coordinate
 		double getAbsoluteOrientation();
 
 		bool getRobotLED_status();

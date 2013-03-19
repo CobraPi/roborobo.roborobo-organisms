@@ -18,6 +18,8 @@
 #include "Utilities/Misc.h"
 
 #include "Observers/WorldObserver.h"
+#include "World/ResourceUpdater.h"
+#include "World/ResourceFactory.h"
 
 class RobotAgent;
 
@@ -37,6 +39,10 @@ protected:
     bool _agentsVariation;
     bool _initializeAgents;
     bool _setUpConnections;
+    bool _initializeEnergyPoints;
+    
+    typedef boost::shared_ptr<ResourceUpdater> ResourceFactoryPtr;
+    std::vector<ResourceFactoryPtr> resourceFactories;
     
     WorldObserver *_worldObserver;
     
@@ -72,6 +78,12 @@ public:
     
     void setSetUpConnections(bool setUpConnections);
     bool getSetUpConnections();
+    
+    void setInitializeEnergyPoints(bool initEnergyPoints);
+    bool getInitializeEnergyPoints();
+    
+    void registerResourceFactory(ResourceFactoryPtr);
+    void unregisterResourceFactory(ResourceFactoryPtr);
 };
 
 

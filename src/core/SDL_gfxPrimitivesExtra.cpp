@@ -78,6 +78,8 @@ void traceRayRGBA(SDL_Surface * image, int x1, int y1, int x2, int y2, Uint8 r, 
 /**
  * Copied from the RoboRobo branch of Nikita
  *
+ * TODO: Use the ResourceFactory instead of this.
+ 
  * @param surface
  * @param sensorRay
  * @param ranges

@@ -151,10 +151,8 @@ void RobotAgent::reset() {
 
 	_wm->_actualTranslationalValue = 0;
 	_wm->_actualRotationalVelocity = 0;
-
-	for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-		_wm->sensors.at(i)->reset();
-	}
+    
+    _wm->resetSensors();
 
 	// Initialize agent observer and Behavior Control Architecture
 
@@ -178,9 +176,7 @@ void RobotAgent::stepBehavior() {
 	}
 	
 	// TODO: Fix leak
-	for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-		_wm->sensors.at(i)->update(new Point2d(_wm->getXReal(), _wm->getYReal()), _wm->getAbsoluteOrientation());
-	}
+	_wm->updateSensors();
 
 	displayInfo();
 }
@@ -198,9 +194,7 @@ void RobotAgent::displayInfo() {
 	if (gVerbose && gDisplayMode <= 1){
 		if (gInspectAgent && gAgentIndexFocus == _wm->_agentId) {
 			std::cout << "Robot #" << _wm->_agentId << " : ( ";
-			for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-				_wm->sensors.at(i)->displaySensorInformation();
-			}
+            _wm->displaySensorInformation();
 			std::cout << " ) => ( " << _wm->_desiredTranslationalValue << " ; " << _wm->_desiredRotationalVelocity << " )." << std::endl;
 		}
 	}
@@ -334,9 +328,9 @@ void RobotAgent::move(int __recursiveIt) // the interface btw agent and world --
 	applyDynamics();
 
 	// save position
-
-	this->xReal_old = _wm->_xReal; // backup old position in case of collision
-	this->yReal_old = _wm->_yReal;
+    oldPosition = _wm->getPosition();
+//	this->xReal_old = _wm->_xReal; // backup old position in case of collision
+//	this->yReal_old = _wm->_yReal;
 
 
 	/*for (int i = 0; i < gNbOfAgents; i++) {
@@ -345,13 +339,15 @@ void RobotAgent::move(int __recursiveIt) // the interface btw agent and world --
 
 	// update x/y position
 
+    Point2d newPosition = oldPosition;
 	_xDeltaReal = _wm->_agentAbsoluteLinearSpeed * cos(_wm->_agentAbsoluteOrientation * M_PI / 180);
 	_yDeltaReal = _wm->_agentAbsoluteLinearSpeed * sin(_wm->_agentAbsoluteOrientation * M_PI / 180);
 
-	_wm->_xReal += _xDeltaReal;
-	_wm->_yReal += _yDeltaReal; // TODO: round is for positive values... (ok in this case however as 0,0 is up-left)
+	newPosition.x += _xDeltaReal;
+    newPosition.y += _yDeltaReal; // TODO: round is for positive values... (ok in this case however as 0,0 is up-left)
 
-	setCoord((int) _wm->_xReal + 0.5, (int) _wm->_yReal + 0.5);
+    _wm->setPosition(newPosition);
+	setCoord((int) newPosition.x + 0.5, (int) newPosition.y + 0.5);
 
 	// * collision with (image) border of the environment - position at border, then bounce
 
@@ -373,18 +369,15 @@ void RobotAgent::move(int __recursiveIt) // the interface btw agent and world --
 		}
 		//_wm->_agentAbsoluteLinearSpeed = 0;
 
-		_wm->_xReal = xReal_old;
-		_wm->_yReal = yReal_old;
-
+        _wm->setPosition(oldPosition);
 		if (!std::isnan(_wm->_agentAbsoluteLinearSpeed) && _wm->_agentAbsoluteLinearSpeed != 0) // if zero: move is canceled
 		{
 			__recursiveIt++;
 			move(__recursiveIt);
 		} else {
 			// special case: agent cannot not move at all - restore original coordinate (remember, _x/yReal are global and modified during recursive call).
-			_wm->_xReal = xReal_old;
-			_wm->_yReal = yReal_old;
-			setCoord((int) _wm->_xReal + 0.5, (int) _wm->_yReal + 0.5);
+            _wm->setPosition(oldPosition);
+			setCoord((int) oldPosition.x + 0.5, (int) oldPosition.y + 0.5);
 		}
 
 		// update world model variables and internal data
@@ -427,9 +420,7 @@ void RobotAgent::move(int __recursiveIt) // the interface btw agent and world --
 	 */
 
 	// update sensors
-	for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-		_wm->sensors.at(i)->update(new Point2d(_wm->getXReal(), _wm->getYReal()), _wm->getAbsoluteOrientation());
-	}
+    _wm->updateSensors();
 }
 
 bool RobotAgent::isCollision() {
@@ -442,7 +433,7 @@ bool RobotAgent::isCollision() {
 		return true;
 	} else {
         // * environment objects
-		for ( int i = 0 ; i != gAgentWidth ; i++ )
+		for ( int i = 0 ; i != gAgentWidth ; i++ ) {
 			for ( int j = 0 ; j != gAgentHeight ; j++ )
 			{
 				if ( getPixel32( gAgentMaskImage , i , j) != SDL_MapRGB( gEnvironmentImage->format, 0xFF, 0xFF, 0xFF ) ) // opt: bounding box instead of pixel-to-pixel test.
@@ -463,23 +454,8 @@ bool RobotAgent::isCollision() {
 					}
 				}
 			}
-        
+        }
 	}
-    //	for (int i = 0; i < gWorld->getNbOfAgent(); i++) {
-    //		RobotAgentPtr other = gWorld->getAgent(i);
-    //
-    //		if (other->_wm->_agentId != this->_wm->_agentId && !this->isPartOfSameOrganism(other)) {
-    //			double x1, y1, x2, y2;
-    //			x1 = this->_wm->_xReal;
-    //			y1 = this->_wm->_yReal;
-    //			x2 = other->_wm->_xReal;
-    //			y2 = other->_wm->_yReal;
-    //
-    //			if (SDL_CollideBoundingCircle(gAgentMaskImage, x1, y1, gAgentMaskImage, x2, y2, 0)) {
-    //				return true;
-    //			}
-    //		}
-    //	}
 	return false;
 }
 
@@ -516,8 +492,8 @@ void RobotAgent::show() // display on screen
 	if (getWorldModel()->getRobotLED_status() == true) {
 		int dx = 1;
 		int dy = 1;
-		int xcenter = (int) _wm->_xReal + 0.5;
-		int ycenter = (int) _wm->_yReal + 0.5;
+		int xcenter = (int) _wm->getPosition().x + 0.5;
+		int ycenter = (int) _wm->getPosition().y + 0.5;
 		int r = getWorldModel()->getRobotLED_redValue();
 		int g = getWorldModel()->getRobotLED_greenValue();
 		int b = getWorldModel()->getRobotLED_blueValue();
@@ -535,8 +511,8 @@ void RobotAgent::show() // display on screen
 	{
 		int dx = 10;
 		int dy = 10;
-		int xcenter = (int) _wm->_xReal + 0.5;
-		int ycenter = (int) _wm->_yReal + 0.5;
+		int xcenter = (int) _wm->getPosition().x + 0.5;
+		int ycenter = (int) _wm->getPosition().y + 0.5;
 		int r = 255.0 * ranf();
 		int g = 255.0 * ranf();
 		int b = 255.0 * ranf();
@@ -560,8 +536,9 @@ void RobotAgent::show() // display on screen
 	if (gDisplaySensors == true) {
 		// * show orientation
 
-		int xOrientationMarker = (int) (_wm->_xReal + 0.5) + gAgentWidth / 2 * cos(_wm->_agentAbsoluteOrientation * M_PI / 180);
-		int yOrientationMarker = (int) (_wm->_yReal + 0.5) + gAgentWidth / 2 * sin(_wm->_agentAbsoluteOrientation * M_PI / 180);
+        Point2d position = _wm->getPosition();
+		int xOrientationMarker = (int) (position.x + 0.5) + gAgentWidth / 2 * cos(_wm->_agentAbsoluteOrientation * M_PI / 180);
+		int yOrientationMarker = (int) (position.y + 0.5) + gAgentWidth / 2 * sin(_wm->_agentAbsoluteOrientation * M_PI / 180);
 
 		if (_wm->_agentId == gAgentIndexFocus && gUserCommandMode) {
 			int g, b;
@@ -576,9 +553,7 @@ void RobotAgent::show() // display on screen
 		}
 
 		// * show sensors
-		for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-			_wm->sensors.at(i)->displaySensors(gScreen, new Point2d(_wm->getXReal(), _wm->getYReal()), _wm->getAbsoluteOrientation());
-		}
+		_wm->displaySensors();
 	}
 
 
@@ -657,10 +632,8 @@ SDL_Surface* RobotAgent::getAgentMask(){
 
 void RobotAgent::setCoordReal(int __x, int __y) // agent is centered on point
 {
-	//setCoord(gAgentXStart+__x,gAgentYStart+__y);
-	//setCoord(__x,__y);
-	_wm->_xReal = __x;
-	_wm->_yReal = __y;
+    Point2d pos(__x,__y);
+    _wm->setPosition(pos);
 }
 
 AgentObserver* RobotAgent::getObserver() {
@@ -695,12 +668,7 @@ std::vector<int> RobotAgent::getNeighbors() {
 }
 
 std::vector<RobotAgentPtr> RobotAgent::getNearRobots(){
-	std::vector<RobotAgentPtr> agents;
-	for(unsigned int i = 0; i < _wm->sensors.size(); i++){
-		_wm->getDefaultSensors()->getNearRobots(&agents, this);
-	}
-	
-	return agents;
+    return _wm->getDefaultSensors()->getNearRobots(this);
 }
 
 // ---- ---- ---- ---- ----
@@ -746,14 +714,11 @@ void RobotAgent::setUpConnections() {
 				return;
 			}
 
-			double x1, y1, x2, y2;
-			x1 = this->_wm->_xReal;
-			y1 = this->_wm->_yReal;
-			x2 = other->_wm->_xReal;
-			y2 = other->_wm->_yReal;
+            Point2d position = _wm->getPosition();
+            Point2d positionOther = otherWM->getPosition();
 
 			// Are they within range?
-			if (SDL_CollideBoundingCircle(gAgentMaskImage, x1, y1, gAgentMaskImage, x2, y2, gConnectionGap)) {
+			if (SDL_CollideBoundingCircle(gAgentMaskImage, position.x, position.y, gAgentMaskImage, positionOther.x, positionOther.y, gConnectionGap)) {
 				// connect to other robot
                 
                 // ---- Mark: but only connect in case you are willing to do so.

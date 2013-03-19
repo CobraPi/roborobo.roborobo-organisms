@@ -39,7 +39,7 @@ void ParcoursController::reset() {
 	
 	ParcoursAgentWorldModel* worldModel = dynamic_cast<ParcoursAgentWorldModel*> (_wm);
 	worldModel->penalty = 0;
-    worldModel->xStart = worldModel->_xReal;
+    worldModel->xStart = worldModel->getPosition().x;
 }
 
 void ParcoursController::step(double &left, double &right) {
@@ -171,7 +171,7 @@ void ParcoursController::createOrganism(double &left, double &right, int desired
 		return;
 	}
 
-	Point2d posRobot(worldModel->_xReal, worldModel->_yReal);
+	Point2d posRobot = worldModel->getPosition();
 
 	double closestDistance = getMaximumDistance();
 	bool found = false;
@@ -184,7 +184,7 @@ void ParcoursController::createOrganism(double &left, double &right, int desired
 	vector<RobotAgentPtr>::iterator it;
 	for (it = close.begin(); it != close.end(); it++) {
 		if ((*it)->getConnectToOthers() == Agent::POSITIVE) {
-			Point2d closeRobot((*it)->getWorldModel()->_xReal, (*it)->getWorldModel()->_yReal);
+			Point2d closeRobot = (*it)->getWorldModel()->getPosition();
 			double distance = getEuclidianDistance(posRobot, closeRobot);
 			if (distance < closestDistance) {
 				found = true;
@@ -263,7 +263,7 @@ vector<double> ParcoursController::getSensorValues() {
 	}
 	
 	sensors.push_back(0.0); // always move right
-    sensors.push_back((gEnvironmentImage->w - worldModel->_xReal) / gEnvironmentImage->w); // distance to goal
+    sensors.push_back((gEnvironmentImage->w - worldModel->getPosition().x) / gEnvironmentImage->w); // distance to goal
 	
 	return sensors;
 }

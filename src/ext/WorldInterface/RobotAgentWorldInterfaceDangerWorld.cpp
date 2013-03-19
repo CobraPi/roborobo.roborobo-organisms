@@ -51,21 +51,21 @@ void RobotAgentWorldInterfaceDangerWorld::applyInternalDynamics( RobotAgentWorld
 			gWorld->getAgent(i)->getWorldModel()->setRobotNeighborhoodCounter(0);
 		
 		// update neighborhood counter for all robots
-		for ( int i = 0 ; i < gAgentCounter-1 ; i++ )
-			for ( int j = i+1 ; j < gAgentCounter ; j++ )
-			{
-				double x1 = gWorld->getAgent(i)->getWorldModel()->getXReal();
-				double y1 = gWorld->getAgent(i)->getWorldModel()->getYReal();
-				double x2 = gWorld->getAgent(j)->getWorldModel()->getXReal();
-				double y2 = gWorld->getAgent(j)->getWorldModel()->getYReal();
-
-				if ( getSquaredEuclidianDistance( x1, y1, x2, y2 ) <= EvolvingRobotAgentWorldModelDangerWorld::_gInfluenceRadius*EvolvingRobotAgentWorldModelDangerWorld::_gInfluenceRadius ) 
-				{
-					gWorld->getAgent(i)->getWorldModel()->incRobotNeighborhoodCounter();
-					gWorld->getAgent(j)->getWorldModel()->incRobotNeighborhoodCounter();
-					//if ( verbose ) std::cout << "!" ;
-				}
-			}
+//		for ( int i = 0 ; i < gAgentCounter-1 ; i++ )
+//			for ( int j = i+1 ; j < gAgentCounter ; j++ )
+//			{
+//				double x1 = gWorld->getAgent(i)->getWorldModel()->getXReal();
+//				double y1 = gWorld->getAgent(i)->getWorldModel()->getYReal();
+//				double x2 = gWorld->getAgent(j)->getWorldModel()->getXReal();
+//				double y2 = gWorld->getAgent(j)->getWorldModel()->getYReal();
+//
+//				if ( getSquaredEuclidianDistance( x1, y1, x2, y2 ) <= EvolvingRobotAgentWorldModelDangerWorld::_gInfluenceRadius*EvolvingRobotAgentWorldModelDangerWorld::_gInfluenceRadius ) 
+//				{
+//					gWorld->getAgent(i)->getWorldModel()->incRobotNeighborhoodCounter();
+//					gWorld->getAgent(j)->getWorldModel()->incRobotNeighborhoodCounter();
+//					//if ( verbose ) std::cout << "!" ;
+//				}
+//			}
 	}
 	/*
 	if ( __wm->_floorSensor == 100 ) // robot is in danger zone.

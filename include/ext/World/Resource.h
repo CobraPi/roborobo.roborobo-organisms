@@ -11,17 +11,31 @@
 #include "RoboroboMain/common.h"
 #include "Utilities/Misc.h"
 
-class Resource{
-private:
+class Resource {
+protected:
 	Point2d position;
 	Uint32 color;
 
 public:
 	virtual ~Resource();
 
-	virtual void display() = 0;
+    /**
+     * Display the resource on a surface.
+     *
+     * @param surface SDL_Surface to display on
+     * @param onScreen if true will also display the resource on the screen
+     *
+     */
+	virtual void display(SDL_Surface *surface) = 0;
 
-	virtual void hide() = 0;
+    /**
+     * hide the resource on a surface.
+     *
+     * @param surface SDL_Surface to display on
+     * @param onScreen if true will also hide the resource on the screen
+     *
+     */
+	virtual void hide(SDL_Surface *surface) = 0;
 
 	virtual void setPosition(Point2d position);
 
@@ -31,7 +45,7 @@ public:
 
 	void setColor(Uint32 color);
 
-	virtual void step() = 0;
+	virtual void step(SDL_Surface *surface) = 0;
 };
 
 

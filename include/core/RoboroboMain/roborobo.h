@@ -12,8 +12,6 @@
 #include "RoboroboMain/common.h"
 //#include "zsu/Properties.h"
 #include "Utilities/ExtendedProperties.h"
-#include "World/EnergyPoint.h"
-#include "World/TypedEnergyPoint.h"
 
 #include <string.h>
 #include <vector>
@@ -98,8 +96,8 @@ extern int gMaxEnergyPoints; // define the number of energy point present in the
 extern double gEnergyPointRadius; // define the "size" of energy points, that is to say, the distance from which a robot can take the energy from an energy point
 extern double gEnergyPointValue; // define the value of an erngy point, i.e. how much energy the robot will earn by taking an energy point
 extern int gEnergyPointRespawnLagMaxValue; // used to know how long will it take to an energy point to reapear
-extern std::vector<EnergyPoint> gEnergyPoints; //list of the energy points currently active
-extern std::vector<std::vector<TypedEnergyPoint> > gTypedEnergyPoints; //list of the energy points currently active
+//extern std::vector<EnergyPoint> gEnergyPoints; //list of the energy points currently active
+//extern std::vector<std::vector<TypedEnergyPoint> > gTypedEnergyPoints; //list of the energy points currently active
 
 //Screen attributes
 extern int gScreenWidth;
@@ -160,8 +158,6 @@ extern SDL_Surface *gAgentSpecsImage;	// image contains specs wrt. proximity sen
 extern SDL_Surface *gZoneImage;  // gZoneImage , gZoneCaptions, gZoneStatus
 extern SDL_Surface *gZoneCaptionImage[256]; // all zone captions. total depends on max color component value (ie. defined in 0...255)
 extern bool gZoneStatus[256]; // told stories 
-
-extern SDL_Surface *gEnergyImage;  // gZoneImage , gZoneCaptions, gZoneStatus
 
 // general purpose
 extern SDL_Event gEvent; //The event structure
