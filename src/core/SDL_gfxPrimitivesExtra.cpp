@@ -8,6 +8,8 @@
  */
 
 #include "Utilities/SDL_gfxPrimitivesExtra.h"
+#include "Utilities/SDL_gfxRoborobo.h"
+
 #ifdef MACOSX
 #include "SDL_ttf/SDL_ttf.h"
 #else
