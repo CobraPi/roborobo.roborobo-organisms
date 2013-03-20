@@ -3,7 +3,8 @@
 syntax:glob
 .svn
 .hgsvn
-.o
+.DS_Store
+*.o
 
 # These lines are suggested according to the svn:ignore property
 # Feel free to enable them by uncommenting them
