@@ -59,7 +59,7 @@
 
 // =-=-=-=-=
 
-long int gVersion = 20100629;
+long int gVersion = 20130320;
 
 std::string gStartTime = getCurrentTimeAsReadableString();
 
@@ -68,10 +68,10 @@ std::string gCompileDate = __DATE__;
 
 
 std::string gPropertiesFilename = "config/default.properties";
-std::string gCurrentBuildInfo = "Krakow build"; // display through "-v[ersion]" command line option -- check/set value in config.h
+std::string gCurrentBuildInfo = "Amsterdam build"; // display through "-v[ersion]" command line option -- check/set value in config.h
 // Bristol build -- june 2010
 // Krakow build -- sept 2010
-
+// Amsterdam build -- march 2013
 
 ExtendedProperties gProperties;
 
