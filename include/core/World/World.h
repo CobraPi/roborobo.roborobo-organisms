@@ -64,9 +64,6 @@ public:
     int getIterations();
     WorldObserver* getWorldObserver();
     int getNbOfAgent();
-    
-	///added method -- Job
-	std::vector<RobotAgentPtr>* listAgents();
 		
     void setInitializeAgents(bool initAgents);
     bool getInitiliazeAgents();

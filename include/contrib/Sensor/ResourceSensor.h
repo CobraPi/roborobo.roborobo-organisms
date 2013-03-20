@@ -23,7 +23,8 @@ public:
     }
     
     ~ResourceSensor(){
-        
+        factory.reset();
+        _sensors.clear();
     }
     
     

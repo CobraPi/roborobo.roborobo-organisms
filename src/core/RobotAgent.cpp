@@ -56,10 +56,16 @@ RobotAgent::RobotAgent(World *__world) {
 
 RobotAgent::~RobotAgent() {
 	delete _agentObserver;
+    _agentObserver = NULL;
     connected->clear();
 	delete connected;
+    connected = NULL;
 	delete _wm;
+    _wm = NULL;
 	delete _behavior;
+    _behavior = NULL;
+    
+    _organism = NULL;
 }
 
 void RobotAgent::reset() {

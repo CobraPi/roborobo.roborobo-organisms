@@ -145,12 +145,12 @@ void MONEEWorldObserver::step()
 {
 	int xa, ya, xb, yb, xo, yo, ds;
 
-	std::vector<RobotAgentPtr>* agents = _world->listAgents();
-
+//	std::vector<RobotAgentPtr>* agents = _world->listAgents();
+// Please use _world->getAgent instead of this.
 	for (int i = 0; i < gAgentCounter - 1; i++) {
 		for (int j = i + 1; j < gAgentCounter; j++) {
-			agents->at(i).get()->getCoord(xa, ya);
-			agents->at(j).get()->getCoord(xb, yb);
+			_world->getAgent(i)->getCoord(xa, ya);
+			_world->getAgent(j)->getCoord(xb, yb);
 			xo = xb - xa;
 			yo = yb - ya;
 			ds = xo * xo + yo * yo;
