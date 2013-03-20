@@ -308,7 +308,8 @@ void ChangingWorldController::avoidObstacles(double &left, double &right, double
 }
 
 ControllerPtr ChangingWorldController::Clone() {
-    return boost::make_shared<ChangingWorldController>(weights, mutationStepSizes);
+    ControllerPtr p = boost::make_shared<ChangingWorldController>(weights, mutationStepSizes);
+    return p;
 }
 
 ControllerPtr ChangingWorldController::crossOverWith(ControllerPtr partner) {

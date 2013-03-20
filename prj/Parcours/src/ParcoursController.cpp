@@ -287,7 +287,8 @@ void ParcoursController::randomWalk(double &left, double &right, double speed) {
 }
 
 ControllerPtr ParcoursController::Clone() {
-	return ControllerPtr(new ParcoursController(weights, mutationStepSizes));
+	ControllerPtr p = boost::make_shared<ParcoursController>(weights, mutationStepSizes);
+    return p;
 }
 
 ControllerPtr ParcoursController::crossOverWith(ControllerPtr partner) {
