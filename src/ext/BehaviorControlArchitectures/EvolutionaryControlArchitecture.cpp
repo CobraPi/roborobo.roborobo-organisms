@@ -11,6 +11,8 @@
 #include "Behavior/WallAvoidanceBehavior.h"
 
 int EvolutionaryControlArchitecture::stepsPerCandidate = 500; // should be overwritten by properties file
+int EvolutionaryControlArchitecture::stepsPerFree = 0;
+int EvolutionaryControlArchitecture::stepsPerRandomFree = 0;
 EvolutionaryControlArchitecture::CalculationMethod EvolutionaryControlArchitecture::fitnessCalculation = AVERAGE;
 
 EvolutionaryControlArchitecture::EvolutionaryControlArchitecture( RobotAgentWorldModel *__wm ) : DifferentialControlArchitecture ( __wm )

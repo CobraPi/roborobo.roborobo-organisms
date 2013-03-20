@@ -24,7 +24,7 @@ void traceRayRGBA(SDL_Surface * image, int x1, int y1, int x2, int y2, Uint8 r, 
 {
 	//lineRGBA(image, x1, y1, x2, y2, 255 , 255 , 255 , 255); // nearly equivalent (small algorithmic differences)
 
-	Uint32 pixelColor =SDL_MapRGB( image->format, r, g, b );
+	Uint32 pixelColor = SDL_MapRGB( image->format, r, g, b );
 	
 	if ( abs(x1-x2) > abs (y1-y2) )
 	{

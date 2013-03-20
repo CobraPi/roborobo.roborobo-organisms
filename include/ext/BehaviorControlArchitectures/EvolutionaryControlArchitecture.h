@@ -48,8 +48,8 @@ public:
 	// the following variables are set by the properties files
 	static int stepsPerCandidate;
 	static CalculationMethod fitnessCalculation;
-	const static int stepsPerFree = 80;
-	const static int stepsPerRandomFree = 20;
+	static int stepsPerFree;
+	static int stepsPerRandomFree;
 	
 protected:
 	ControllerPtr candidate;

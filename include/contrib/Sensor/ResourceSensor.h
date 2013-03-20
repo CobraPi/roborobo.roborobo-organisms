@@ -15,6 +15,18 @@
 #include "Sensor/Sensor.h"
 #include "World/ResourceFactory.h"
 
+/**
+ * \class ResourceSensor
+ *
+ * Template class that implements a sensor that senses Resources that are managed by a ResourceFactory.
+ * \sa Resource \sa ResourceFactory
+ *
+ * This sensor is able to sense two things:
+ *  - The range at which something has been sensed
+ *  - The id of the object that has been sensed. This is determined by the red value of the Resource color.
+ *
+ *
+ */
 template<class Resource>
 class ResourceSensor : public Sensor {
 public:
@@ -29,26 +41,12 @@ public:
     
     
 	/**
-	 * Initializes the sensors. Required.
+	 * Initializes the sensors.
 	 *
-	 * Typically, sensors are read from a file and then initialized (for example
-	 * the standard object detection sensors). This will initialize for example
-	 * the angle and distance of the sensor, the number of sensors, the color of
-	 * the sensors etc. This kind of initialization needs to be done in the init
-	 * method, and is therefore required.
+     * This implementation uses the default gAgentSpecsImage
 	 *
 	 */
-	virtual void init(Point2d position, double orientation) {
-        int sensorCount = 0;
-        for (int x = 0; x != gAgentWidth; x++){ // image is analysed a first time to count the number of sensors (faster than dynamically re-allocating array size for every new sensor)
-            for (int y = 0; y != gAgentHeight; y++) {
-                Uint32 pixel = getPixel32(gAgentSpecsImage, x, y);
-                if (pixel != SDL_MapRGB(gAgentSpecsImage->format, 0xFF, 0xFF, 0xFF)){
-                    sensorCount++;
-                }
-			}
-        }
-        
+	virtual void init(Point2d position, double orientation) {       
         for (int x = 0; x != gAgentWidth; x++){
             for (int y = 0; y != gAgentHeight; y++) {
                 Uint32 pixel = getPixel32(gAgentSpecsImage, x, y);
@@ -62,11 +60,7 @@ public:
                         std::cout << "[ERROR] robot sensor id already in use -- check agent specification image." << std::endl;
                         assert(r >= _sensors.size() || ( r < _sensors.size() && _sensors.is_null(r)));
                     }
-                    if (r >= sensorCount) {
-                        std::cout << "[ERROR] robot sensor id is not permitted (must be defined btw 0 and " << (sensorCount - 1) << ", got: " << r << ") -- check agent specification image." << std::endl;
-                        assert(r <= sensorCount);
-                    }
-                
+
                     _sensors.push_back(new SensorData);
                     _sensors[r].id = r; // no. sensor
                     _sensors[r].value = -1;
@@ -100,7 +94,7 @@ public:
     
     
 	/**
-	 * Update your sensor values. Required.
+	 * Updates the sensors.
 	 */
 	virtual void update(Point2d position, double orientation){
         for (int i = 0; i < _sensors.size() ; i++) {
@@ -113,7 +107,7 @@ public:
             factory->getRGB(x2,y2,&r,&g,&b);
             
             if(r != 0xff){
-                _sensors[i].objectId = r; // R=level of energy
+                _sensors[i].objectId = r; // R=objectId
             }else{
                 _sensors[i].objectId = 0; // white = no energy
             }
@@ -133,13 +127,13 @@ public:
     
 	/**
 	 * Used for displaying the sensors on the screen,
-	 * when not using the batch mode. If you want to use
-	 * batch mode, or do not want to show the sensor on the screen,
-	 * implementing this class is not necessary per sè. (however, it
-	 * would be nice and preferable)
+	 * when not using the batch mode. 
 	 *
 	 * @param screen
 	 * 		The screen to paint the sensors on
+     *
+     * @param position
+     *      The positoin of the robot
 	 */
 	virtual void displaySensor(SDL_Surface *screen, Point2d position, double orientation, std::deque<bool> &displayed, bool force){
         for (int i = 0; i < _sensors.size() ; i++) {
@@ -177,10 +171,10 @@ public:
         
     }
     /**
-	 * return sensor range (equal to maximum range if no obstacle)
+	 * Returns the sensor range (equal to maximum range if no obstacle)
 	 *
 	 * @param i
-	 * @return
+	 * @return the range that was sensed
 	 */
 	double getSensorValue( int i ){
         return ((SensorData)_sensors[i]).value;
@@ -188,11 +182,10 @@ public:
     
     
 	/**
-	 * return type of obstacle hit by sens
-     RobotAgentWorldModel::~RobotAgentWorldModelor ray (if any)
+	 * Returns the id of the obstacle hit by sensor ray (if any)
 	 *
 	 * @param i
-	 * @return
+	 * @return The object id
 	 */
 	double getSensorTypeValue( int i ){
         return ((SensorData)_sensors[i]).objectId;
@@ -213,6 +206,17 @@ public:
     
 private:
     
+    /**
+     * Calculates the start and end positions of the sensors based on the position and orientation of the robot.
+     *
+     * @param position The robots position
+     * @param orientation The robots orientation (in radians)
+     * @param sensorId The id of the sensor
+     * @param x1 Destination for the x-coordinate of the sensor origin
+     * @param y1 Destination for the y-coordinate of the sensor origin
+     * @param x2 Destination for the x-coordinate of the sensor target
+     * @param y2 Destination for the y-coordinate of the sensor target
+     */
     void getSensorPositions(Point2d position, double orientation, int sensorId, double &x1, double &y1, double &x2, double &y2){
         // Warning: the following is repeated in the show method because coordinates are not stored, but are needed to display the sensor rays.
         x1 = (position.x + _sensors[sensorId].origin * cos(_sensors[sensorId].originAngle + orientation * M_PI / 180));
