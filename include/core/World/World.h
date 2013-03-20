@@ -41,8 +41,7 @@ protected:
     bool _setUpConnections;
     bool _initializeEnergyPoints;
     
-    typedef boost::shared_ptr<ResourceUpdater> ResourceFactoryPtr;
-    std::vector<ResourceFactoryPtr> resourceFactories;
+    std::vector<ResourceUpdaterPtr> resourceUpdaters;
     
     WorldObserver *_worldObserver;
     
@@ -82,8 +81,8 @@ public:
     void setInitializeEnergyPoints(bool initEnergyPoints);
     bool getInitializeEnergyPoints();
     
-    void registerResourceFactory(ResourceFactoryPtr);
-    void unregisterResourceFactory(ResourceFactoryPtr);
+    void registerResourceUpdater(ResourceUpdaterPtr);
+    void unregisterResourceUpdater(ResourceUpdaterPtr);
 };
 
 
