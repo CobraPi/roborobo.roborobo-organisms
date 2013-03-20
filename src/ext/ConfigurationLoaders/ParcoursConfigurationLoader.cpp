@@ -62,7 +62,7 @@ bool ParcoursConfigurationLoader::readProperties(ExtendedProperties *gProperties
 	}
     
     gProperties->checkAndGetPropertyValue("evolutionStepsPerFree", &EvolutionaryControlArchitecture::stepsPerFree, true);
-    gProperties->checkAndGetPropertyValue("evolutionstepsPerRandomFree", &EvolutionaryControlArchitecture::stepsPerRandomFree, true);
+    gProperties->checkAndGetPropertyValue("evolutionStepsPerRandomFree", &EvolutionaryControlArchitecture::stepsPerRandomFree, true);
 	
 	string fitnessCalculation;
 	gProperties->checkAndGetPropertyValue("evolutionFitnessCalculation", &fitnessCalculation, true);

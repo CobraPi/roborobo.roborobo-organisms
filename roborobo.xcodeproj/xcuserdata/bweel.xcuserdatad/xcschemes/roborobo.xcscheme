@@ -44,7 +44,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Volumes/Data/Users/bweel/Documents/workspace/RoboRobo"
+      customWorkingDirectory = "/Volumes/Data/repositories/roborobo"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "YES"
       debugDocumentVersioning = "YES"
