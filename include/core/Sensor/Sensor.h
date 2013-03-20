@@ -15,14 +15,20 @@
 
 #include <deque>
 
+/**
+ * \struct SensorData. Stores the data of a sensor
+ *
+ *
+ *
+ */
 struct SensorData {
-    int id;
-    double origin; // origin with respect to the agent center
-    double originAngle; // angle towards origin from agent center
-    double length; // length of the sensor from agent center
-    double angle; // angle of the sensor
-    double value; // value of the sensor
-    double objectId; // id of the sensed object (if applicable)
+    int id; ///< id of the sensor
+    double origin; ///< origin with respect to the agent center
+    double originAngle; ///< angle of the origin from agent center
+    double length; ///< length of the sensor from agent center
+    double angle; ///< angle of the sensor
+    double value; ///< value of the sensor
+    double objectId; ///< id of the sensed object (if applicable)
 };
 
 typedef boost::shared_ptr<SensorData> SensorDataPtr;

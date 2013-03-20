@@ -60,6 +60,9 @@ bool ParcoursConfigurationLoader::readProperties(ExtendedProperties *gProperties
 		std::cerr << "[MISSING] evolutionStepsPerCandidate value is missing." << std::endl;
 		returnValue = false;
 	}
+    
+    gProperties->checkAndGetPropertyValue("evolutionStepsPerFree", &EvolutionaryControlArchitecture::stepsPerFree, true);
+    gProperties->checkAndGetPropertyValue("evolutionstepsPerRandomFree", &EvolutionaryControlArchitecture::stepsPerRandomFree, true);
 	
 	string fitnessCalculation;
 	gProperties->checkAndGetPropertyValue("evolutionFitnessCalculation", &fitnessCalculation, true);

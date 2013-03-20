@@ -21,7 +21,8 @@
 #include "Utilities/SDL_gfxRoborobo.h"
 #include "World/ResourceUpdater.h"
 
-/*! \class ResourceFactory
+/**
+ * \class ResourceFactory
  *
  * \brief ResourceFactory is a singleton class that manages resources in the world \sa Resource
  *
