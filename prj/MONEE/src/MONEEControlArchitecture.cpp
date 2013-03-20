@@ -290,17 +290,16 @@ void MONEEControlArchitecture::assignFitness(std::vector<Genome> & genomes) {
 // Just gather all nearby genomes. Duplicates will be handled elsewhere.
 void MONEEControlArchitecture::gatherGenomes(std::vector<Genome*> & genePool, int commDistSquared) {
     genePool.clear();
-    std::vector<RobotAgentPtr>* agents = gWorld->listAgents();
     std::vector<RobotAgentPtr>::iterator itAgent;
     if (commDistSquared < 0) {
-        for (itAgent = agents->begin(); itAgent < agents->end(); itAgent++) {
-            RobotAgentPtr& agent = *itAgent;
+        for (int i=0;i<gWorld->getNbOfAgent(); i++) {
+            RobotAgentPtr agent = gWorld->getAgent(i);
             MONEEControlArchitecture* controller = static_cast<MONEEControlArchitecture*>(agent->getBehavior());
             genePool.push_back(controller->getGenome());
         }
     } else {
-        for (itAgent = agents->begin(); itAgent < agents->end(); itAgent++) {
-            RobotAgentPtr& agent = *itAgent;
+        for (int i=0;i<gWorld->getNbOfAgent(); i++) {
+            RobotAgentPtr agent = gWorld->getAgent(i);
             if (isRadioConnection(agent->getWorldModel()->_agentId,_wm->_agentId)) {
                 MONEEControlArchitecture* controller = static_cast<MONEEControlArchitecture*>(agent->getBehavior());
                 genePool.push_back(controller->getGenome());

@@ -421,12 +421,6 @@ int World::getNbOfAgent() {
 	return agents.size();
 }
 
-///added method -- Job
-std::vector<RobotAgentPtr>* World::listAgents(){
-	return &agents;
-}
-
-
 void World::setInitializeAgents(bool initAgents){
     _initializeAgents = initAgents;
 }
