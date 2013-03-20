@@ -1406,11 +1406,9 @@
 			isa = PBXGroup;
 			children = (
 				61C7EF7A16F2008E00F3DC23 /* Coord2d.h */,
-				61C7EF7B16F2008E00F3DC23 /* LioLib */,
 				61C7EF8916F2008E00F3DC23 /* Organism.h */,
 				61C7EF8A16F2008E00F3DC23 /* SDL_collide.h */,
 				61C7EF8B16F2008E00F3DC23 /* Sensor */,
-				61C7EF8D16F2008E00F3DC23 /* ahhs */,
 				61C7EF8E16F2008E00F3DC23 /* multikulti */,
 				61C7EF9116F2008E00F3DC23 /* neuralnetworks */,
 				61C7EF9916F2008E00F3DC23 /* newscast */,
@@ -1418,117 +1416,6 @@
 				61C7EFA316F2008E00F3DC23 /* zsu */,
 			);
 			path = contrib;
-			sourceTree = "<group>";
-		};
-		61C7EF7B16F2008E00F3DC23 /* LioLib */ = {
-			isa = PBXGroup;
-			children = (
-				61C7EF7C16F2008E00F3DC23 /* liobehaviorlib */,
-				61C7EF7F16F2008E00F3DC23 /* liogenetics */,
-				61C7EF8216F2008E00F3DC23 /* lioneuralnet */,
-				61C7EF8616F2008E00F3DC23 /* lioutilities */,
-			);
-			path = LioLib;
-			sourceTree = "<group>";
-		};
-		61C7EF7C16F2008E00F3DC23 /* liobehaviorlib */ = {
-			isa = PBXGroup;
-			children = (
-				61C7EF7D16F2008E00F3DC23 /* behaviors */,
-				61C7EF7E16F2008E00F3DC23 /* src */,
-			);
-			path = liobehaviorlib;
-			sourceTree = "<group>";
-		};
-		61C7EF7D16F2008E00F3DC23 /* behaviors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = behaviors;
-			sourceTree = "<group>";
-		};
-		61C7EF7E16F2008E00F3DC23 /* src */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		61C7EF7F16F2008E00F3DC23 /* liogenetics */ = {
-			isa = PBXGroup;
-			children = (
-				61C7EF8016F2008E00F3DC23 /* genetics */,
-				61C7EF8116F2008E00F3DC23 /* src */,
-			);
-			path = liogenetics;
-			sourceTree = "<group>";
-		};
-		61C7EF8016F2008E00F3DC23 /* genetics */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = genetics;
-			sourceTree = "<group>";
-		};
-		61C7EF8116F2008E00F3DC23 /* src */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		61C7EF8216F2008E00F3DC23 /* lioneuralnet */ = {
-			isa = PBXGroup;
-			children = (
-				61C7EF8316F2008E00F3DC23 /* activationfunctions */,
-				61C7EF8416F2008E00F3DC23 /* neuralnets */,
-				61C7EF8516F2008E00F3DC23 /* src */,
-			);
-			path = lioneuralnet;
-			sourceTree = "<group>";
-		};
-		61C7EF8316F2008E00F3DC23 /* activationfunctions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = activationfunctions;
-			sourceTree = "<group>";
-		};
-		61C7EF8416F2008E00F3DC23 /* neuralnets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = neuralnets;
-			sourceTree = "<group>";
-		};
-		61C7EF8516F2008E00F3DC23 /* src */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		61C7EF8616F2008E00F3DC23 /* lioutilities */ = {
-			isa = PBXGroup;
-			children = (
-				61C7EF8716F2008E00F3DC23 /* lioutils */,
-				61C7EF8816F2008E00F3DC23 /* src */,
-			);
-			path = lioutilities;
-			sourceTree = "<group>";
-		};
-		61C7EF8716F2008E00F3DC23 /* lioutils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = lioutils;
-			sourceTree = "<group>";
-		};
-		61C7EF8816F2008E00F3DC23 /* src */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		61C7EF8B16F2008E00F3DC23 /* Sensor */ = {
@@ -1539,13 +1426,6 @@
 			);
 			name = Sensor;
 			path = Sensors;
-			sourceTree = "<group>";
-		};
-		61C7EF8D16F2008E00F3DC23 /* ahhs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ahhs;
 			sourceTree = "<group>";
 		};
 		61C7EF8E16F2008E00F3DC23 /* multikulti */ = {

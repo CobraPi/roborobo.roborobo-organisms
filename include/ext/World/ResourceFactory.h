@@ -31,9 +31,13 @@ public:
         nextId = 0;
         resources = std::vector<ResourcePtr>();
         
-        // Prepare a surface to hold the energy spots so sensors can detect them
+        // Prepare a surface to hold the resources so sensors can detect them
         resourceImage = SDL_CreateRGBSurface (gScreen->flags, gAreaWidth, gAreaHeight, gScreen->format->BitsPerPixel, gScreen->format->Rmask, gScreen->format->Gmask, gScreen->format->Bmask, gScreen->format->Amask);
+        
+        // White is transparant
         SDL_SetColorKey(resourceImage, SDL_SRCCOLORKEY, SDL_MapRGB(resourceImage->format, 0xFF, 0xFF, 0xFF));
+        
+        // Fill the image with white
         SDL_FillRect(resourceImage, NULL, SDL_MapRGB(resourceImage->format,0xFF, 0xFF, 0xFF));
     }
     

@@ -23,17 +23,13 @@ World::World() {
     _initializeEnergyPoints = true;
     
 	_worldObserver = gConfigurationLoader->make_WorldObserver(this);
-    resourceFactories = std::vector<ResourceFactoryPtr>();
-    
-//    ResourceFactory<EnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<EnergyPoint>::getInstance();
-//    resourceFactories.push_back(factory);
-//    
-//    ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr typedFactory = ResourceFactory<TypedEnergyPoint>::getInstance();
-//    resourceFactories.push_back(typedFactory);
+    resourceUpdaters = std::vector<ResourceUpdaterPtr>();
 }
 
 World::~World() {
 	delete _worldObserver;
+    resourceUpdaters.clear();
+    agents.clear();
 }
 
 
@@ -79,7 +75,7 @@ void World::initWorld() {
 		Organism::reset();
 	}
     
-    resourceFactories.clear();
+    resourceUpdaters.clear();
 
 	_worldObserver->reset();
 }
@@ -153,8 +149,8 @@ void World::updateWorld(Uint8 *__keyboardStates) {
 	_worldObserver->step();
 
 	// update world resources
-    for(int i=0; i<resourceFactories.size();i++){
-        resourceFactories[i]->step();
+    for(int i=0; i<resourceUpdaters.size();i++){
+        resourceUpdaters[i]->step();
     }
     
 
@@ -455,13 +451,13 @@ bool World::getInitializeEnergyPoints(){
     return _initializeEnergyPoints;
 }
 
-void World::registerResourceFactory(ResourceFactoryPtr factory){
-    if(std::find(resourceFactories.begin(), resourceFactories.end(), factory) == resourceFactories.end()){
-        resourceFactories.push_back(factory);
+void World::registerResourceUpdater(ResourceUpdaterPtr factory){
+    if(std::find(resourceUpdaters.begin(), resourceUpdaters.end(), factory) == resourceUpdaters.end()){
+        resourceUpdaters.push_back(factory);
     }
 }
 
-void World::unregisterResourceFactory(ResourceFactoryPtr factory){
-    resourceFactories.erase(std::find(resourceFactories.begin(), resourceFactories.end(), factory));
+void World::unregisterResourceUpdater(ResourceUpdaterPtr factory){
+    resourceUpdaters.erase(std::find(resourceUpdaters.begin(), resourceUpdaters.end(), factory));
 }
 

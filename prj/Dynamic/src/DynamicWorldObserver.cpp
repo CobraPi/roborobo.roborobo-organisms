@@ -69,7 +69,7 @@ void DynamicWorldObserver::step() {
 }
 
 void DynamicWorldObserver::initializePlants(){
-    _world->registerResourceFactory(ResourceFactory<TypedEnergyPoint>::getInstance());
+    _world->registerResourceUpdater(ResourceFactory<TypedEnergyPoint>::getInstance());
     
     int totPlants = 0;
     yintercept = 20 - 4 * DynamicSharedData::slope;

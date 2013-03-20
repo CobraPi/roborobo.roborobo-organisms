@@ -56,6 +56,7 @@ RobotAgent::RobotAgent(World *__world) {
 
 RobotAgent::~RobotAgent() {
 	delete _agentObserver;
+    connected->clear();
 	delete connected;
 	delete _wm;
 	delete _behavior;
