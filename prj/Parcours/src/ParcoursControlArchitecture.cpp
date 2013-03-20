@@ -40,7 +40,8 @@ ControllerPtr ParcoursControlArchitecture::createRandomGenome() {
 		weights[i] = Rand::randouble() * 2.0 - 1;
 	}
 
-	return boost::make_shared<ParcoursController>(weights);
+	ControllerPtr p = boost::make_shared<ParcoursController>(weights);
+    return p;
 }
 
 double ParcoursControlArchitecture::calculateStepFitness() {

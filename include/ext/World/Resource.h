@@ -37,6 +37,11 @@ public:
      */
 	virtual void hide(SDL_Surface *surface) = 0;
 
+    /**
+     * Set the position of the resource
+     *
+     * @param position The position to set
+     */
 	virtual void setPosition(Point2d position);
 
 	virtual Point2d getPosition();
