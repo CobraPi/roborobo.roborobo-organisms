@@ -52,10 +52,7 @@ SymbrionOrganismGenome* SymbrionRobotAgent::getGenome(){
 
 void SymbrionRobotAgent::toSeed()
 {
-	SymbrionOrganismGenome* newGenome = NULL;
-	bool crossover = false;
-    bool mutation = false;
-    
+	SymbrionOrganismGenome* newGenome = NULL;    
     if( _receivedGenomes.size() >= 2 )
 	{
 		int i = rand() % _receivedGenomes.size();
@@ -67,7 +64,6 @@ void SymbrionRobotAgent::toSeed()
 		
 		newGenome = _receivedGenomes.at(i)->crossover( _receivedGenomes.at(j) );
 		_receivedGenomes.clear();
-        crossover = true;
 	}
 	else if( _receivedGenomes.size() == 1 )
 	{
@@ -75,12 +71,10 @@ void SymbrionRobotAgent::toSeed()
 		
 		newGenome = _genome->crossover( _receivedGenomes.at(j) );
 		_receivedGenomes.clear();
-        crossover = true;
 	}
 	else
 	{
 		newGenome = _genome;
-        mutation = true;
 	}
 	
 	_genome = newGenome->mutate();
