@@ -8,10 +8,10 @@
 #ifndef SENSORS_H_
 #define SENSORS_H_
 
+#include "Utilities/Misc.h"
 #include "RoboroboMain/common.h"
 #include "RoboroboMain/roborobo.h"
 #include "Utilities/SDL_gfxRoborobo.h"
-#include "Utilities/Misc.h"
 
 #include <deque>
 
