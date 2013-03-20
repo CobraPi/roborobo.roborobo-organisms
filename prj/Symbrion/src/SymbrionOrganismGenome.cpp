@@ -272,7 +272,7 @@ void SymbrionOrganismGenome::add()
 	
 	do
 	{
-		int from = rand() % _coords.size() + 1;
+		int from = rand() % (_coords.size() + 1);
 		int dir = rand() % 4;
 		int to = _coords.size() + 1;
 		

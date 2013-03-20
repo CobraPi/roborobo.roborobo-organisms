@@ -258,7 +258,7 @@ void clean_up() {
 
 
 	//Quit SDL
-	//SDL_Quit();
+	SDL_Quit();
 }
 
 void displayHelp() {

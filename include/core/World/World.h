@@ -27,11 +27,7 @@ class World
 {
 protected:
     
-    std::vector<RobotAgentPtr> agents;//[gNbOfAgents];
-    //std::vector<bool> agentRegister;//[gNbOfAgents]; // track agents which are registered (ie. drawn) in the foreground image (for agent-agent collision)
-    
-    //RobotAgent *agents[gNbOfAgents];
-    //bool agentRegister[gNbOfAgents]; // track agents which are registered (ie. drawn) in the foreground image (for agent-agent collision)
+    std::vector<RobotAgentPtr> agents;
     
     int _iterations;
     

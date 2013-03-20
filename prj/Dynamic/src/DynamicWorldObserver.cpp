@@ -117,6 +117,7 @@ void DynamicWorldObserver::updatePlants(){
     std::cerr << "Plants per type:";
     int totPlants = 0;
     int sizes[DynamicSharedData::NUM_WEIGHTS];
+    std::fill( sizes, sizes + sizeof( sizes ), 0 );
 
     // Update the number of plants
     ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<TypedEnergyPoint>::getInstance();

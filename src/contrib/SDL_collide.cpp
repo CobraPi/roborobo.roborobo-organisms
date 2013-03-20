@@ -54,7 +54,7 @@ int SDL_CollideTransparentPixel(SDL_Surface *surface, int u, int v) {
 	/*here p is the address to the pixel we want to retrieve*/
 	Uint8 *p = (Uint8 *) surface->pixels + v * surface->pitch + u * bpp;
 
-	Uint32 pixelcolor;
+	Uint32 pixelcolor = surface->format->colorkey;
 
 	switch (bpp) {
 		case(1):

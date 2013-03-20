@@ -32,7 +32,6 @@ World::~World() {
     agents.clear();
 }
 
-
 /**
  * Initializes a new simulation World, creates the agents and loads the
  * environment files. These files will be stored as an SDL_surface and used
@@ -394,7 +393,8 @@ bool World::loadFiles() {
 }
 
 RobotAgentPtr World::getAgent(int __agentIndex) {
-	return agents[__agentIndex];
+	RobotAgentPtr p = agents[__agentIndex];
+    return p;
 }
 
 void World::deleteAgent(int __agentIndex) {

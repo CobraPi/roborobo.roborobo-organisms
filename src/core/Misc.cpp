@@ -28,9 +28,7 @@ double getGaussianRand(double m, double s)	/* normal random variate generator */
 	}
 	else
 	{
-		do {
-			x1 = ((double)rand()/(1.0+(double)RAND_MAX)); //??? check and delete
-		
+		do {		
 			x1 = 2.0 * ranf() - 1.0;
 			x2 = 2.0 * ranf() - 1.0;
 			w = x1 * x1 + x2 * x2;
