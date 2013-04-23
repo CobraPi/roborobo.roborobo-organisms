@@ -13,9 +13,13 @@
 
 class TypedEnergyPoint: public EnergyPoint {
 private:
+    friend class ResourceFactory<TypedEnergyPoint>;
+    
     int _type;
     static Uint32 colors[10];
 
+    virtual void display(SDL_Surface *surface);
+    virtual void hide(SDL_Surface *surface);
 public:
     TypedEnergyPoint(int id, SDL_Surface *surface);
     TypedEnergyPoint(int id, SDL_Surface *surface, int type);
@@ -25,9 +29,6 @@ public:
     int getType();
 
     static Uint32 getColor(int type);
-
-    virtual void display(SDL_Surface *surface);
-    virtual void hide(SDL_Surface *surface);
 };
 
 #endif /* TYPEDENERGYPOINT_H_ */

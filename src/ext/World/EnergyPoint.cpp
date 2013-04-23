@@ -21,7 +21,7 @@ EnergyPoint::EnergyPoint(int id, SDL_Surface *surface)
 	_id = id;
 
 	_fixedLocation = true;
-	_active = true;
+	active = true;
 
 	setColor(0xeab71fff); //Setting the color of the EnergyPoint with a default value
 
@@ -33,7 +33,7 @@ EnergyPoint::EnergyPoint(int id, SDL_Surface *surface,Uint32 color)
 	_id = id;
 
 	_fixedLocation = true;
-	_active = true;
+	active = true;
 
 	setColor(color); //Setting the color of the EnergyPoint with a default value
 
@@ -54,7 +54,7 @@ void EnergyPoint::initialize(SDL_Surface *surface){
 	EnergyPoint::_nextId++; // update id reference.
     
 	_fixedLocation = false;
-	_active = true;
+	active = true;
     
     gProperties.checkAndGetPropertyValue("gEnergyPointRadius", &gEnergyPointRadius, true);
 	_radius = gEnergyPointRadius;
@@ -122,6 +122,8 @@ void EnergyPoint::initialize(SDL_Surface *surface){
 
         setPosition(Point2d(x,y));
 	}
+    
+    display(surface);
 }
 
 bool EnergyPoint::isCollision(SDL_Surface *surface){
@@ -132,12 +134,13 @@ bool EnergyPoint::isCollision(SDL_Surface *surface){
 		// * collision with border
 		return true;
     } else {
+        Uint32 white = SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF );
         for (int xColor = getPosition().x - _radius ; xColor < getPosition().x + _radius; xColor++)
         {
             for (int yColor = getPosition().y - _radius ; yColor < getPosition().y + _radius; yColor++)
             {
                 if ((sqrt ( pow (xColor- getPosition().x,2) + pow (yColor - getPosition().y,2))) < _radius
-                    && getPixel32(surface , xColor, yColor) != SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF ))
+                    && getPixel32(surface , xColor, yColor) != white)
                 {
                     return true;
                 }
@@ -179,14 +182,6 @@ void EnergyPoint::hide(SDL_Surface *surface)
                 }
             }
         }
-        
-        // re-display energypoints that we overlapped
-        std::vector<ResourceFactory<EnergyPoint>::ResourcePtr> energyPoints = ResourceFactory<EnergyPoint>::getInstance()->getResources();
-        for(int i=0;i<energyPoints.size();i++){
-            if(energyPoints[i]->_active && energyPoints[i]->_id != this->_id && getEuclidianDistance(energyPoints[i]->getPosition().x, energyPoints[i]->getPosition().y, this->getPosition().x, this->getPosition().y) < (energyPoints[i]->_radius + this->_radius)){
-                energyPoints[i]->display(surface);
-            }
-        }
     }
 }
 
@@ -195,27 +190,22 @@ int EnergyPoint::getRespawnLag()
 	return gEnergyPointRespawnLagMaxValue;
 }
 
-void EnergyPoint::setActiveStatus( bool __value )
+/*void EnergyPoint::setActiveStatus( bool __value )
 {
 	if ( __value == true )
 	{
-		_active = true;
+		active = true;
 	}
 	else
 	{	
-		_active = false;
-
-        hide(ResourceFactory<EnergyPoint>::getInstance()->getSDLSurface());
+		active = false;
         
 		if(gVerbose)
 			gLogFile << gWorld->getIterations() << " :: EnergyPoint nb." << _id << " #internLag: " << _respawnLag << std::endl; // This is not relevant - internLag does not exist anymore, this should be either _respawnLag or gEnergyPointRespawnLagMaxValue (ie. time to respawn)
-	}	
-}
+	}
+}*/
 
-bool EnergyPoint::getActiveStatus()
-{
-	return _active;
-}
+
 
 float EnergyPoint::getKey()
 {
@@ -276,7 +266,7 @@ void EnergyPoint::setEnergyPointValue( int __value )
 
 void EnergyPoint::step(SDL_Surface *surface)
 {
-	if ( !_active ) // case: harvested. respawn delay?
+	if ( !active ) // case: harvested. respawn delay?
 	{
 		_internLagCounter++;
 
@@ -288,7 +278,7 @@ void EnergyPoint::step(SDL_Surface *surface)
 				_respawnLag = gEnergyPointRespawnLagMaxValue; // all energy points share the respawn lag value
 
 			_internLagCounter = 0;
-			_active = true;
+			active = true;
 
 			if ( ! _fixedLocation )
 			{
@@ -307,29 +297,6 @@ void EnergyPoint::step(SDL_Surface *surface)
 			}
 		}
 	}
-//	else
-//	{
-//		if ( _visible && gDisplayMode == 0 )
-//		{
-//			// NOTE: calling the display method, re-display the food image (but have
-//			// no impact on simulation whatsoever as food harvesting is based on 
-//			// computed euclidian distance btw agents and energy points). This is used
-//			// to guarantee a "nice and clean" display as overlapping energy points 
-//			// may result in cropped remaining points whenever a point is taken (ie.
-//			// the actual implementation implies deleting the energy point region
-//			// that was harvested, without any regards to overlaps).
-//			// IT IS IMPORTANT TO NOTE THAT SYSTEMATIC CALLS TO DISPLAY MAY 
-//			// SIGNIFICANTLY SLOW DOWN THE SIMULATION! As a consequence, it should
-//			// be called with care, and should NOT be called if not be called when
-//			// the simulation is running fast (e.g. batch mode).
-//			// Current implementation: 
-//			//	calls only if display mode is normal speed
-//			//	and if property "EnergyPoints_alwaysRender" is true
-//			
-//			if ( gEnergyPoints_alwaysRender ) // NOTE: the hide() method but be called externally (otw: displayed points may not exist anymore)
-//				display();
-//		}
-//	}
 }
 
 

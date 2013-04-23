@@ -52,14 +52,6 @@ void TypedEnergyPoint::hide(SDL_Surface *surface)
 {
     if(getVisibility()){
         EnergyPoint::hide(surface);
-
-        // re-display energypoints that we overlapped
-        std::vector<ResourceFactory<TypedEnergyPoint>::ResourcePtr> energyPoints = ResourceFactory<TypedEnergyPoint>::getInstance()->getResources();
-        for(int i=0;i<energyPoints.size();i++){
-            if(energyPoints[i]->getActiveStatus() && energyPoints[i]->getID() != this->getID()&& getEuclidianDistance(energyPoints[i]->getPosition().x, energyPoints[i]->getPosition().y, this->getPosition().x, this->getPosition().y) < (energyPoints[i]->getRadius() + this->getRadius())){
-                energyPoints[i]->display(surface);
-            }
-        }
     }
 }
 

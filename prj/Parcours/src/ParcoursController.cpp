@@ -11,7 +11,7 @@
 #include "Utils/Rand.h"
 #include "Behavior/WallAvoidanceBehavior.h"
 
-static int MAX_ORG_SIZE = 10;
+static int MAX_ORG_SIZE = 9;
 static int MAX_SPEED = 1;
 static int MAX_ANGLE = 180;
 

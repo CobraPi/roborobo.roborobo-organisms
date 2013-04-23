@@ -78,7 +78,8 @@ void ChangingWorldWorldObserver::updateAllAgentsEnergy() {
         
 		if (currentAgentWorldModel->isActive()) {
 			Point2d posRobot = currentAgentWorldModel->getPosition();
-            std::vector<ResourceFactory<EnergyPoint>::ResourcePtr> energyPoints = ResourceFactory<EnergyPoint>::getInstance()->getResources();
+            ResourceFactory<EnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<EnergyPoint>::getInstance();
+            std::vector<ResourceFactory<EnergyPoint>::ResourcePtr> energyPoints = factory->getResources();
 //			for (std::vector<EnergyPoint>::iterator it = energyPoints.begin(); it != energyPoints.end(); it++) {
 			for(unsigned int j =0; j < energyPoints.size();j++){
                 int x1 = posRobot.x;
@@ -122,7 +123,7 @@ void ChangingWorldWorldObserver::updateAllAgentsEnergy() {
 						}
 //                        std::cout << currentAgentWorldModel->getEnergyLevel() << " energy" << std::endl;
 					}
-                    energyPoints[j]->setActiveStatus(false);
+                    factory->setActiveStatus(energyPoints[j],false);
 				}
 			}
 		}
