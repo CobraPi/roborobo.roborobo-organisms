@@ -85,6 +85,9 @@ public:
     virtual void step(){
         for (typename std::vector<ResourcePtr>::iterator it = resources.begin(); it != resources.end(); it++){
             (*it)->step(resourceImage);
+            if(!(*it)->getActiveStatus()){
+                (*it)->hide(resourceImage);
+            }
         }
     }
     
@@ -115,6 +118,11 @@ public:
      */
     virtual void removeResource(ResourcePtr resource){
         resources.erase(std::find(resources.begin(),resources.end(),resource));
+    }
+    
+    virtual void setActiveStatus(ResourcePtr resource,bool status) {
+        resource->setActiveStatus(false);
+        resource->hide(resourceImage);
     }
 
     /**

@@ -44,7 +44,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Volumes/Data/repositories/roborobo"
+      customWorkingDirectory = "/Volumes/Data/repositories/roborobo-organisms"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "YES"
       debugDocumentVersioning = "YES"
@@ -61,11 +61,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-l config/parcours.properties"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-l config/dynamic.properties"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-l config/default.properties"

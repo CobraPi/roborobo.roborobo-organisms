@@ -15,9 +15,11 @@
 #include "World/Resource.h"
 #include "World/ResourceFactory.h"
 
+class TypedEnergyPoint;
+
 class EnergyPoint : public Resource {
 	private :
-        friend class ResourceFactory<EnergyPoint>;
+    friend class ResourceFactory<EnergyPoint>;
 
 		static int _nextId;
 
@@ -34,13 +36,20 @@ class EnergyPoint : public Resource {
 		bool _respawnMethodIsLocal; // default: false
 		int _energyPointRespawnLagMaxValue; // default: gEnergyPointRespawnLagMaxValue (but not used as long as _respawnMethodIsLocal is false)
 
-		bool _active; // active points can be harvested, inactive points do not exist.
 		bool _visible; // display option
 
 		double _key;
 		double _initLock;
 
 		int _iterationMax;
+
+    // These functions should exclusively be called by a ResourceFactory
+    protected:
+        virtual void step(SDL_Surface *surface);
+        virtual void display(SDL_Surface *surface);
+        virtual void hide(SDL_Surface *surface);
+    
+//        virtual void setActiveStatus( bool __value );
 
         void initialize(SDL_Surface *surface);
         bool isCollision(SDL_Surface *surface);
@@ -72,18 +81,11 @@ class EnergyPoint : public Resource {
 		void setRespawnLagMethodIsLocal( bool __value );
 		bool getRespawnLagMethodIsLocal();
 
-		void setActiveStatus( bool __value );
-		bool getActiveStatus();
-
 		float getKey();
 		void setKey(float key);
 		
 		void setFixedLocationStatus( bool __value );
 		bool getFixedLocationStatus();
-
-		virtual void step(SDL_Surface *surface);
-		virtual void display(SDL_Surface *surface);
-		virtual void hide(SDL_Surface *surface);
 };
 
 #endif

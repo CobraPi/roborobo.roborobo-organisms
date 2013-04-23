@@ -132,7 +132,7 @@ void DynamicWorldObserver::updatePlants(){
         }else if(typedEnergyPoints[i].size() > nPlants){
             int remPlants = typedEnergyPoints[i].size() - nPlants;
             for(int j=0;j<remPlants;j++){
-            	typedEnergyPoints[i].back()->setActiveStatus(false);
+            	factory->setActiveStatus(typedEnergyPoints[i].back(),false);
                 factory->removeResource(typedEnergyPoints[i].back());
                 typedEnergyPoints[i].pop_back();
             }
@@ -150,7 +150,7 @@ void DynamicWorldObserver::updatePlants(){
         if(sizes[0] > sizes[DynamicSharedData::NUM_WEIGHTS-1]){
             int index = 0;
             for(int i=0;i<excess;i++){
-                typedEnergyPoints[i].back()->setActiveStatus(false);
+                factory->setActiveStatus(typedEnergyPoints[i].back(),false);
                 factory->removeResource(typedEnergyPoints[i].back());
             	typedEnergyPoints[index].pop_back();
                 index = (index + 1) % DynamicSharedData::NUM_WEIGHTS;
@@ -159,7 +159,7 @@ void DynamicWorldObserver::updatePlants(){
         }else{
             int index = DynamicSharedData::NUM_WEIGHTS-1;
             for(int i=0;i<excess;i++){
-                typedEnergyPoints[i].back()->setActiveStatus(false);
+                factory->setActiveStatus(typedEnergyPoints[i].back(),false);
                 factory->removeResource(typedEnergyPoints[i].back());
             	typedEnergyPoints[index].pop_back();
                 
@@ -215,6 +215,8 @@ void DynamicWorldObserver::updateAllAgentsEnergy() {
 
 		if (currentAgentWorldModel->isActive()) {
 			Point2d posRobot = currentAgentWorldModel->getPosition();
+            ResourceFactory<TypedEnergyPoint>::ResourceFactoryPtr factory = ResourceFactory<TypedEnergyPoint>::getInstance();
+            
 			for(unsigned int j = 0; j < typedEnergyPoints.size();j++){
                 for(unsigned int k = 0; k < typedEnergyPoints[j].size();k++){
                     if (typedEnergyPoints[j][k]->getActiveStatus() && // The energy point is active
@@ -258,7 +260,7 @@ void DynamicWorldObserver::updateAllAgentsEnergy() {
                                     currentAgentWorldModel->setEnergyGained(currentAgentWorldModel->getEnergyGained() + loadingEnergy);
                                 }
                             }
-                            typedEnergyPoints[j][k]->setActiveStatus(false);
+                            factory->setActiveStatus(typedEnergyPoints[j][k],false);
                         }
                     }
 				}

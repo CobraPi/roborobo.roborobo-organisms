@@ -23,6 +23,7 @@ class Resource {
 protected:
 	Point2d position;
 	Uint32 color;
+    bool active;
 
 public:
 	virtual ~Resource();
@@ -82,6 +83,14 @@ public:
      *    calling display or hide from the step function
      */
 	virtual void step(SDL_Surface *surface) = 0;
+    
+    void setActiveStatus( bool _value ) {
+        active = _value;
+    }
+    
+    bool getActiveStatus() {
+        return active;
+    }
 };
 
 
