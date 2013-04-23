@@ -96,7 +96,9 @@ public:
      */
     virtual void displayResources(){
         for (typename std::vector<ResourcePtr>::iterator it = resources.begin(); it != resources.end(); it++){
-            (*it)->display(resourceImage);
+            if((*it)->getActiveStatus()){
+                (*it)->display(resourceImage);
+            }
         }
     }
     
