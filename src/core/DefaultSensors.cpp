@@ -4,7 +4,7 @@
 #include "Utilities/SDL_gfxPrimitivesExtra.h"
 
 DefaultSensors::DefaultSensors(){
-	_sensors = NULL;
+//	_sensors = NULL;
 	_ditchSensor = NULL;
 	_energySensor = NULL;
 	_sensorCount = 0;
@@ -12,16 +12,16 @@ DefaultSensors::DefaultSensors(){
 }
 
 DefaultSensors::~DefaultSensors(){
-	if ( _sensors != NULL )
-		delete[] _sensors;
+//	if ( _sensors != NULL )
+//		delete[] _sensors;
 	if ( _ditchSensor != NULL )
 		delete[] _ditchSensor;
 	if ( _energySensor != NULL )
 		delete[] _energySensor;
 }
 
-double** DefaultSensors::getSensors(){
-	return (double**)_sensors;
+std::vector<std::vector<double> > DefaultSensors::getSensors(){
+	return _sensors;
 }
 
 void DefaultSensors::init(Point2d position, double orientation){
@@ -36,15 +36,18 @@ void DefaultSensors::init(Point2d position, double orientation){
             }
         }
     }
-	_sensors = new double[_sensorCount][7]; // see header for details.
+//	_sensors = new double[_sensorCount][7]; // see header for details.
 	_ditchSensor = new double[_sensorCount];
 	_energySensor = new double[_sensorCount][2];
 
 	for (int i = 0; i < _sensorCount; i++) {
-		_sensors[i][0] = -1;
+        std::vector<double> _sensor(7);
+		_sensor[0] = -1;
 		// 1 - 4 set below
-		_sensors[i][5] = -1;
-		_sensors[i][6] = -1;
+		_sensor[5] = -1;
+		_sensor[6] = -1;
+        
+        _sensors.push_back(_sensor);
 
 		_ditchSensor[i] = -1;
         _energySensor[i][0] = -1;

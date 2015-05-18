@@ -81,6 +81,7 @@ MONEEControlArchitecture::MONEEControlArchitecture( RobotAgentWorldModel *__wm )
 	 * can be used
 	 */
 	//register sensors
+    _rangeSensors.resize(_wm->getDefaultSensors()->getSensorCount());
 	for (int x = 0; x != gAgentWidth; x++) {
 		for (int y = 0; y != gAgentHeight; y++) {
 			Uint32 pixel = getPixel32(gAgentSpecsImage, x, y);
@@ -89,11 +90,11 @@ MONEEControlArchitecture::MONEEControlArchitecture( RobotAgentWorldModel *__wm )
 				Uint8 r, g, b;
 				SDL_GetRGB(pixel, gAgentSpecsImage->format, &r, &g, &b);
 
-				if (_wm->getDefaultSensors()->getSensors()[r][0] != -1) {
-					std::cout << "[ERROR] robot sensor id already in use -- check agent specification image." << std::endl;
-					exit(-1);
-				}
-
+//				if (_wm->getDefaultSensors()->getSensors()[r][0] != -1) {
+//					std::cout << "[ERROR] robot sensor id already in use -- check agent specification image." << std::endl;
+//					exit(-1);
+//				}
+//
 				if (r >= _wm->getDefaultSensors()->getSensorCount()) {
 					std::cout << "[ERROR] robot sensor id is not permitted (must be defined btw 0 and " << (_wm->getDefaultSensors()->getSensorCount() - 1) << ", got: " << r << ") -- check agent specification image." << std::endl;
 					exit(-1);
@@ -137,7 +138,8 @@ MONEEControlArchitecture::MONEEControlArchitecture( RobotAgentWorldModel *__wm )
 					targetAngle = -acos(cosTarget) + M_PI * 2.5;
 
 				_rangeSensors[sensorId] = new PuckSensors(sensorId, originDistance, originAngle, targetDistance, targetAngle, gSensorRange);
-				_rangeSensors[sensorId]->getOldSensorData(_wm->getDefaultSensors()->getSensors()[sensorId]);
+                // THIS IS UGLY GETTING ADDRESS FROM REFERENCE, DO NOT COPY!
+				_rangeSensors[sensorId]->getOldSensorData(&(_wm->getDefaultSensors()->getSensors()[sensorId].front()));
 
 				r++;
 			}

@@ -41,58 +41,6 @@ MONEEWorldObserver::MONEEWorldObserver( World *__world ) : WorldObserver( __worl
 	gProperties.checkAndGetPropertyValue("gColorChangeIteration", &tmpInt, true);
 	_colorChangeIteration = tmpInt;
 
-	if (gEnergyMode) {
-		// Should be declared before agent models are created
-		gProperties.checkAndGetPropertyValue("gPuckColors", &gPuckColors, true);
-
-		double w = gBackgroundImage->w;
-		double h = gBackgroundImage->h;
-
-		gPuckMap.resize(w);
-		for (int i = 0; i < w; i++) gPuckMap[i].resize(h);
-
-		double xMean, yMean, xSigma, ySigma;
-
-		std::vector<int> puckCount;
-		puckCount.reserve(gPuckColors);
-		gPuckGens.reserve(gPuckColors);
-
-		gPuckCount = 0;
-
-		for (int puckGenIdx = 0; puckGenIdx < gPuckColors; puckGenIdx++) {
-			std::stringstream ss; ss << "puckGen[" << puckGenIdx << "]";
-			std::string base = ss.str();
-			gProperties.checkAndGetPropertyValue(base +".xMean", &tmpReal, true);
-			xMean = w * tmpReal;
-			gProperties.checkAndGetPropertyValue(base + ".yMean", &tmpReal, true);
-			yMean = h * tmpReal;
-			gProperties.checkAndGetPropertyValue(base + ".xSigma", &tmpReal, true);
-			xSigma = w * tmpReal;
-			gProperties.checkAndGetPropertyValue(base + ".ySigma", &tmpReal, true);
-			ySigma = h * tmpReal;
-			PuckGen newPuckGen(xMean, yMean, xSigma, ySigma, Puck::PALETTE[puckGenIdx]);
-			gPuckGens.push_back(newPuckGen);
-
-			gProperties.checkAndGetPropertyValue(base + ".count", &tmpInt, true);
-			puckCount.push_back(tmpInt);
-			gPuckCount += tmpInt;
-		}
-
-		gPucks.reserve(gPuckCount);
-
-		for (Uint8 i = 0; i < puckCount.size(); i++) {
-			int pucksToGo = puckCount[i];
-			while (pucksToGo > 0) {
-				Puck newPuck(&gPuckGens[i]);
-				gPucks.push_back(newPuck);
-				pucksToGo--;
-			}
-		}
-	}
-
-	gUseDitchSensors = false;
-
-	G_COLOR_WHITE = SDL_MapRGB(gForegroundImage->format, 0xFF, 0xFF, 0xFF);
 	///end from world.cpp///
 }
 
@@ -128,6 +76,58 @@ void MONEEWorldObserver::reset()
 	gBoolRadioNetworkArray.assign(gAgentCounter * gAgentCounter, true);
 	//for (int i = 0; i != gAgentCounter; i++) (gRadioNetworkArray.at(i)).reserve(gAgentCounter);
 
+    if (gEnergyMode) {
+		// Should be declared before agent models are created
+		gProperties.checkAndGetPropertyValue("gPuckColors", &gPuckColors, true);
+        
+		double w = 10.0; //gBackgroundImage-
+		double h = gBackgroundImage->h;
+        
+		gPuckMap.resize(w);
+		for (int i = 0; i < w; i++) gPuckMap[i].resize(h);
+        
+		double xMean, yMean, xSigma, ySigma;
+        
+		std::vector<int> puckCount;
+		puckCount.reserve(gPuckColors);
+		gPuckGens.reserve(gPuckColors);
+        
+		gPuckCount = 0;
+        
+		for (int puckGenIdx = 0; puckGenIdx < gPuckColors; puckGenIdx++) {
+			std::stringstream ss; ss << "puckGen[" << puckGenIdx << "]";
+			std::string base = ss.str();
+			gProperties.checkAndGetPropertyValue(base +".xMean", &tmpReal, true);
+			xMean = w * tmpReal;
+			gProperties.checkAndGetPropertyValue(base + ".yMean", &tmpReal, true);
+			yMean = h * tmpReal;
+			gProperties.checkAndGetPropertyValue(base + ".xSigma", &tmpReal, true);
+			xSigma = w * tmpReal;
+			gProperties.checkAndGetPropertyValue(base + ".ySigma", &tmpReal, true);
+			ySigma = h * tmpReal;
+			PuckGen newPuckGen(xMean, yMean, xSigma, ySigma, Puck::PALETTE[puckGenIdx]);
+			gPuckGens.push_back(newPuckGen);
+            
+			gProperties.checkAndGetPropertyValue(base + ".count", &tmpInt, true);
+			puckCount.push_back(tmpInt);
+			gPuckCount += tmpInt;
+		}
+        
+		gPucks.reserve(gPuckCount);
+        
+		for (Uint8 i = 0; i < puckCount.size(); i++) {
+			int pucksToGo = puckCount[i];
+			while (pucksToGo > 0) {
+				Puck newPuck(&gPuckGens[i]);
+				gPucks.push_back(newPuck);
+				pucksToGo--;
+			}
+		}
+	}
+    
+	gUseDitchSensors = false;
+    
+	G_COLOR_WHITE = SDL_MapRGB(gForegroundImage->format, 0xFF, 0xFF, 0xFF);
 
 	if (gEnergyMode) {
 		// Randomly place pucks on the field.
