@@ -117,8 +117,8 @@ void EnergyPoint::initialize(SDL_Surface *surface){
 	setPosition(Point2d(x,y));
     while (randomStart && isCollision(surface)) {
 		//std::cout << "Collision detected on " << x << ", " << y << " rerolling" << std::endl;
-		x = (int) 20 + (ranf() * (double) (gSpawnWidth));
-		y = (int) 20 + (ranf() * (double) (gSpawnHeight));
+		x = (int) 20 + (ranf() * (double) (gAreaWidth));
+		y = (int) 20 + (ranf() * (double) (gAreaHeight));
 
         setPosition(Point2d(x,y));
 	}

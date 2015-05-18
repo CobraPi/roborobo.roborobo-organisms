@@ -18,7 +18,7 @@ private:
 	/// id sensor(R),sensor_origin_norm,sensor_origin_angle,
 	/// sensor_target_distance_from_agent_center(!),sensor_target_angle,
 	/// "current value", object Id.
-	double (*_sensors)[7];
+    std::vector<std::vector<double> > _sensors;
 	/// result is the **red** value from gZoneImage by raycasting the same
 	/// sensor as the normal sensors
 	double (*_ditchSensor);
@@ -150,7 +150,8 @@ RobotAgentWorldModel::~RobotAgentWorldModelor ray (if any)
 	void displaySensorInformation();
 
 
-	double** getSensors();
+//	double** getSensors();
+    std::vector<std::vector<double> > getSensors();
 
 	std::vector<RobotAgentPtr> getNearRobots(RobotAgent *agent);
 
